@@ -11,20 +11,20 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/posts")
 public class PostRestController {
-    private final PostService postService;
+//    private final PostService postService;
 
-    @GetMapping("/")
-    public List<Post> getAllPost() {
-        return postService.getAllPosts();
-    }
+//    @GetMapping("/")
+//    public List<Post> getAllPost() {
+//        return postService.getAllPosts();
+//    }
 
-    @GetMapping("/{id}")
-    public Post getPostById(@PathVariable Long id) {
-        return postService.findById(id).get();
-    }
+//    @GetMapping("/{id}")
+//    public Post getPostById(@PathVariable Long id) {
+//        return postService.findById(id).get();
+//    }
 
-    @PostMapping("/")
-    public Post addPost(@RequestBody Post post) {
-        return postService.save(post);
-    }
+//    @PostMapping("/")
+//    public Post addPost(@RequestBody Post post) {
+//        return postService.save(post);
+//    }
 }

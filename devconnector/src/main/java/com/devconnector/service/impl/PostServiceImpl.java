@@ -1,5 +1,6 @@
 package com.devconnector.service.impl;
 
+import com.devconnector.dto.PostDTO;
 import com.devconnector.model.Post;
 import com.devconnector.repository.PostRepository;
 import com.devconnector.service.PostService;
@@ -16,22 +17,40 @@ public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
 
     @Override
-    public Optional<Post> findById(Long id) {
-        return postRepository.findById(id);
+    public PostDTO findById(Long id) {
+        return null;
+//        return postRepository.findById(id);
     }
 
     @Override
-    public Post save(Post post) {
-        return postRepository.save(post);
+    public PostDTO addPost(PostDTO postDTO) {
+//        return postRepository.save(post);
+        return null;
     }
 
     @Override
-    public void delete(Post post) {
-        postRepository.delete(post);
+    public void deletePostById(Long id) {
+        postRepository.deleteById(id);
     }
 
     @Override
-    public List<Post> getAllPosts() {
-        return postRepository.findAll();
+    public PostDTO like(Long postId) {
+        return null;
+    }
+
+    @Override
+    public PostDTO unLike(Long postId) {
+        return null;
+    }
+
+    @Override
+    public PostDTO comment(Long postId) {
+        return null;
+    }
+
+    @Override
+    public List<PostDTO> getAllPosts() {
+//        return postRepository.findAll();
+        return null;
     }
 }

@@ -1,13 +1,15 @@
 package com.devconnector.service;
 
-import com.devconnector.model.Post;
-
+import com.devconnector.dto.PostDTO;
 import java.util.List;
-import java.util.Optional;
 
 public interface PostService {
-    Optional<Post> findById(Long id);
-    Post save(Post post);
-    void delete(Post post);
-    List<Post> getAllPosts();
+    List<PostDTO> getAllPosts();
+    PostDTO findById(Long id);
+    PostDTO addPost(PostDTO postDTO);
+    void deletePostById(Long id);
+    PostDTO like(Long postId);
+    PostDTO unLike(Long postId);
+    PostDTO comment(Long postId);
+
 }

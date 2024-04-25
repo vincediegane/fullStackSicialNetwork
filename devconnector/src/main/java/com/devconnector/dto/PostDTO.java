@@ -9,12 +9,9 @@ import java.time.Instant;
 @AllArgsConstructor
 @Builder
 public class PostDTO {
-
+    private Long id;
     private String title;
-
     private String body;
-
     private Instant createdAt;
-
-    private Long userId;
+    private UserDTO userDTO;
 }
