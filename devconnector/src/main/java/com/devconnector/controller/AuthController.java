@@ -3,6 +3,7 @@ package com.devconnector.controller;
 import com.devconnector.dto.AuthRequestDTO;
 import com.devconnector.dto.AuthResponseDTO;
 import com.devconnector.dto.RegisterRequestDTO;
+import com.devconnector.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;

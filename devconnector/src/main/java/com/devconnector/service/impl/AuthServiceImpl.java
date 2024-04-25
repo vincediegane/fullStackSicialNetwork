@@ -5,17 +5,20 @@ import com.devconnector.enumeration.Role;
 import com.devconnector.dto.AuthRequestDTO;
 import com.devconnector.dto.AuthResponseDTO;
 import com.devconnector.dto.RegisterRequestDTO;
+import com.devconnector.exception.AppException;
 import com.devconnector.model.User;
 import com.devconnector.repository.UserRepository;
 import com.devconnector.service.AuthService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.nio.CharBuffer;
 import java.time.Instant;
 
 @Service
@@ -57,10 +60,14 @@ public class AuthServiceImpl implements AuthService {
         var user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow();
 
-        var jwtToken = jwtService.generateToken(user);
-        return AuthResponseDTO.builder()
-            .token(jwtToken)
-            .build();
+        if(passwordEncoder.matches(CharBuffer.wrap(request.getPassword()), user.getPassword())) {
+            var jwtToken = jwtService.generateToken(user);
+            return AuthResponseDTO.builder()
+                    .token(jwtToken)
+                    .build();
+        }
+
+        throw new AppException("Invalid password", HttpStatus.BAD_REQUEST);
     }
 
     @Override
