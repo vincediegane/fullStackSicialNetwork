@@ -6,6 +6,7 @@ import com.devconnector.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 import java.time.Instant;
 import java.util.Arrays;
@@ -18,13 +19,11 @@ public class DevconnectorApplication {
 		SpringApplication.run(DevconnectorApplication.class, args);
 	}
 
+	@Bean
 	public CommandLineRunner run(UserRepository userRepository) {
-		List<User> users = Arrays.asList(
-			User.builder().role(Role.USER).email("vincediegane@gmail.com").password("123456").firstName("Vincent").lastName("Faye").createdAt(Instant.now()).build(),
-			User.builder().role(Role.ADMIN).email("kadambabs@gmail.com").password("123456").firstName("Babacar").lastName("Kadam").createdAt(Instant.now()).build()
-		);
  		return args -> {
-			userRepository.saveAll(users);
+			userRepository.save(User.builder().role(Role.USER).email("vincediegane@gmail.com").password("123456").firstName("Vincent").lastName("Faye").createdAt(Instant.now()).build());
+			userRepository.save(User.builder().role(Role.ADMIN).email("babskadam@gmail.com").password("123456").firstName("Babacar").lastName("Kadam").createdAt(Instant.now()).build());
 		};
 	}
 
