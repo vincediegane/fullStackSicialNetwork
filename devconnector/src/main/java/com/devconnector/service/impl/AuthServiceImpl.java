@@ -20,6 +20,8 @@ import org.springframework.stereotype.Service;
 
 import java.nio.CharBuffer;
 import java.time.Instant;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -43,7 +45,14 @@ public class AuthServiceImpl implements AuthService {
             .build();
         userRepository.save(user);
 
-        var jwtToken = jwtService.generateToken(user);
+        // Added
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("firstName", user.getFirstName());
+        claims.put("lastName", user.getLastName());
+        claims.put("role", user.getRole());
+
+//  First      var jwtToken = jwtService.generateToken(user);
+        var jwtToken = jwtService.generateToken(claims, user);
         return AuthResponseDTO.builder()
             .token(jwtToken)
             .build();
@@ -60,8 +69,15 @@ public class AuthServiceImpl implements AuthService {
         var user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow();
 
+        //Added
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("firstName", user.getFirstName());
+        claims.put("lastName", user.getLastName());
+        claims.put("role", user.getRole());
+
         if(passwordEncoder.matches(CharBuffer.wrap(request.getPassword()), user.getPassword())) {
-            var jwtToken = jwtService.generateToken(user);
+//  First          var jwtToken = jwtService.generateToken(user);
+            var jwtToken = jwtService.generateToken(claims, user);
             return AuthResponseDTO.builder()
                     .token(jwtToken)
                     .build();
