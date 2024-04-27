@@ -57,10 +57,10 @@ public class User implements UserDetails {
     @OneToOne(mappedBy = "user")
     private Profile profile;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Post> posts;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Like> likes;
 
     private Instant createdAt;
