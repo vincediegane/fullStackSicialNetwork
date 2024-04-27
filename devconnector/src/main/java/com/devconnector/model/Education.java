@@ -13,7 +13,7 @@ import java.time.Instant;
 @Entity
 public class Education {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "school_name")
     private String school;

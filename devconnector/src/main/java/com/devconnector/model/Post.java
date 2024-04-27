@@ -18,7 +18,7 @@ import java.util.List;
 @Entity
 public class Post {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
     private Long id;
 
@@ -27,7 +27,7 @@ public class Post {
     @NotEmpty(message = "*Please provide title")
     private String title;
 
-    @Column(name = "body", columnDefinition = "TEXT")
+    @Column(name = "body", columnDefinition = "TEXT", nullable = false)
     private String body;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -42,4 +42,7 @@ public class Post {
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Comment> comments;
+
+    @OneToMany(mappedBy = "post")
+    private List<Like> likes;
 }
