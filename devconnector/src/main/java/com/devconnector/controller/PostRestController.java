@@ -2,6 +2,7 @@ package com.devconnector.controller;
 
 import com.devconnector.dto.PostDTO;
 import com.devconnector.dto.PostRequestDTO;
+import com.devconnector.service.LikeService;
 import com.devconnector.service.PostService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import java.util.List;
 @RequestMapping("/api/v1/posts")
 public class PostRestController {
     private final PostService postService;
+    private final LikeService likeService;
 
     @GetMapping("/")
     public List<PostDTO> getAllPost() {
@@ -30,15 +32,15 @@ public class PostRestController {
         return postService.addPost(postRequestDTO, connectedUser);
     }
 
-    @PutMapping("/like/{postId}")
+    @PostMapping("/like/{postId}")
     public ResponseEntity<String> likePost(@PathVariable Long postId, Authentication connectedUser) {
         postService.like(postId, connectedUser);
         return ResponseEntity.ok("Liked");
     }
 
-    @PutMapping("/unlike/{postId}")
-    public ResponseEntity<String> unlikePost(@PathVariable Long postId, Authentication connectedUser) {
-        postService.unlike(postId, connectedUser);
+    @PostMapping("/unlike/{likeId}")
+    public ResponseEntity<String> unlikePost(@PathVariable Long likeId) {
+        likeService.unlike(likeId);
         return ResponseEntity.ok("Unliked");
     }
 }

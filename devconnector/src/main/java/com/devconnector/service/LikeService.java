@@ -8,4 +8,5 @@ public interface LikeService {
     List<LikeDTO> findAll();
     List<LikeDTO> findLikesByPost(Long postId);
     LikeDTO findById(Long likeId);
+    void unlike(Long likeId);
 }

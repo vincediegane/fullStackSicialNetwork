@@ -37,4 +37,10 @@ public class LikeServiceImpl implements LikeService {
         Like like = likeRepository.findById(likeId).orElseThrow(() -> new AppException("Like not found", HttpStatus.NOT_FOUND));
         return likeMapper.fromLike(like);
     }
+
+    @Override
+    public void unlike(Long likeId) {
+        Like like = likeRepository.findById(likeId).orElseThrow(() -> new AppException("Like not found", HttpStatus.NOT_FOUND));
+        likeRepository.deleteById(likeId);
+    }
 }

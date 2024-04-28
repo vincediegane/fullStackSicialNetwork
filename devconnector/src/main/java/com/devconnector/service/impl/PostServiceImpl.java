@@ -72,26 +72,26 @@ public class PostServiceImpl implements PostService {
         Like savedLike = likeRepository.save(like);
     }
 
-    @Override
-    public void unlike(Long postId, Authentication connectedUser) {
-        User user = (User) connectedUser.getPrincipal();
-
-        Post post = postMapper.fromPostDTO(findById(postId));
-        if(post == null) {
-            throw new AppException("Post not found", HttpStatus.NOT_FOUND);
-        }
-
-        if(post.getLikes() == null) {
-            post.setLikes(new ArrayList<>());
-        }
-
-        Like like = post.getLikes().stream().filter(l -> l.getUser().getId().equals(user.getId()))
-            .findFirst()
-            .orElseThrow(() ->
-                new AppException("Like not found", HttpStatus.BAD_REQUEST));
-
-        likeRepository.deleteById(like.getId());
-    }
+//    @Override
+//    public void unlike(Long postId, Authentication connectedUser) {
+//        User user = (User) connectedUser.getPrincipal();
+//
+//        Post post = postMapper.fromPostDTO(findById(postId));
+//        if(post == null) {
+//            throw new AppException("Post not found", HttpStatus.NOT_FOUND);
+//        }
+//
+//        if(post.getLikes() == null) {
+//            post.setLikes(new ArrayList<>());
+//        }
+//
+//        Like like = post.getLikes().stream().filter(l -> l.getUser().getId().equals(user.getId()))
+//            .findFirst()
+//            .orElseThrow(() ->
+//                new AppException("Like not found", HttpStatus.BAD_REQUEST));
+//
+//        likeRepository.deleteById(like.getId());
+//    }
 
     @Override
     public PostDTO comment(Long postId, Authentication connectedUser) {
