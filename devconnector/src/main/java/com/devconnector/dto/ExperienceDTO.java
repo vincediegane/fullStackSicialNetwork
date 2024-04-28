@@ -18,6 +18,7 @@ public class ExperienceDTO {
     private Instant toDate;
     private String description;
     private boolean current;
+    private Instant createdAt;
 
     public boolean getCurrent() {
         return current;

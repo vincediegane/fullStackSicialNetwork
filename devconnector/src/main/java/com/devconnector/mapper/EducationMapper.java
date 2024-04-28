@@ -21,7 +21,7 @@ public class EducationMapper {
             .fromDate(education.getFromDate())
             .toDate(education.getToDate())
             .current(education.getCurrent())
-            .createdAt(education.getCreatedAt)
+            .createdAt(education.getCreatedAt())
             .build();
     }
 

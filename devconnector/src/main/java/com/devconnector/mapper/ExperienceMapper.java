@@ -1,13 +1,18 @@
 package com.devconnector.mapper;
 
 import com.devconnector.dto.ExperienceDTO;
+import com.devconnector.dto.ProfileDTO;
 import com.devconnector.model.Experience;
 import com.devconnector.model.Profile;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class ExperienceMapper {
-    public Experience fromExperienceDTO(ExperienceDTO experienceDTO, Profile profile) {
+    private final  ProfileMapper profileMapper;
+
+    public Experience fromExperienceDTO(ExperienceDTO experienceDTO) {
         return Experience.builder()
             .id(experienceDTO.getId())
             .title(experienceDTO.getTitle())
@@ -17,8 +22,23 @@ public class ExperienceMapper {
             .fromDate(experienceDTO.getFromDate())
             .toDate(experienceDTO.getToDate())
             .current(experienceDTO.getCurrent())
-            .profile(profile)
+            .createdAt(experienceDTO.getCreatedAt())
             .build();
+    }
+
+    public Experience fromExperienceDTO(ExperienceDTO experienceDTO, ProfileDTO profileDTO) {
+        return Experience.builder()
+                .id(experienceDTO.getId())
+                .title(experienceDTO.getTitle())
+                .company(experienceDTO.getCompany())
+                .location(experienceDTO.getLocation())
+                .description(experienceDTO.getDescription())
+                .fromDate(experienceDTO.getFromDate())
+                .toDate(experienceDTO.getToDate())
+                .current(experienceDTO.getCurrent())
+                .createdAt(experienceDTO.getCreatedAt())
+                .profile(profileMapper.fromProfileDTO(profileDTO))
+                .build();
     }
 
     public ExperienceDTO fromExperience(Experience experience) {
@@ -31,6 +51,7 @@ public class ExperienceMapper {
             .fromDate(experience.getFromDate())
             .toDate(experience.getToDate())
             .current(experience.getCurrent())
+            .createdAt(experience.getCreatedAt())
             .build();
     }
 }

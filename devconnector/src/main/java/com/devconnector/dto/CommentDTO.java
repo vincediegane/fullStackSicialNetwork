@@ -10,14 +10,8 @@ import java.time.Instant;
 @AllArgsConstructor
 @Builder
 public class CommentDTO {
-
     private Long id;
-
     private String body;
-
     private Instant createdAt;
-
     private String postId;
-
-    private String userId;
 }

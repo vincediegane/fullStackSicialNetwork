@@ -24,6 +24,7 @@ public class Experience {
     private Instant toDate;
     private String description;
     private boolean current;
+    private Instant createdAt;
 
     @ManyToOne
     @JoinColumn(name = "profile_id", referencedColumnName = "profile_id", nullable = true)
