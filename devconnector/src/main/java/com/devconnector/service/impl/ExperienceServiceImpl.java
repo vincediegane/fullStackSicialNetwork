@@ -2,9 +2,15 @@ package com.devconnector.service.impl;
 
 import com.devconnector.dto.ExperienceDTO;
 import com.devconnector.service.ExperienceService;
+import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
+@Transactional
+@AllArgsConstructor
 public class ExperienceServiceImpl implements ExperienceService {
     @Override
     public List<ExperienceDTO> findAll() {

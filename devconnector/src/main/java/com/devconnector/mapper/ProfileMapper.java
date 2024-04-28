@@ -1,7 +1,9 @@
 package com.devconnector.mapper;
 
 import com.devconnector.dto.ProfileDTO;
+import com.devconnector.dto.UserDTO;
 import com.devconnector.model.Profile;
+import com.devconnector.model.User;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,16 +16,29 @@ public class ProfileMapper {
 
     public Profile fromProfileDTO(ProfileDTO profileDTO) {
         return Profile.builder()
-            .id(profileDTO.getId())
-            .bio(profileDTO.getBio())
-            .company(profileDTO.getCompany())
-            .createdAt(profileDTO.getCreatedAt())
-            .status(profileDTO.getStatus())
-            .website(profileDTO.getWebsite())
-            .githubUsername(profileDTO.getGithubUsername())
-            .location(profileDTO.getLocation())
-            .user(userMapper.fromUserDTO(profileDTO.getUserDTO()))
-            .build();
+        .id(profileDTO.getId())
+        .bio(profileDTO.getBio())
+        .company(profileDTO.getCompany())
+        .createdAt(profileDTO.getCreatedAt())
+        .status(profileDTO.getStatus())
+        .website(profileDTO.getWebsite())
+        .githubUsername(profileDTO.getGithubUsername())
+        .location(profileDTO.getLocation())
+        .build();
+    }
+
+    public Profile fromProfileDTO(ProfileDTO profileDTO, UserDTO userDTO) {
+        return Profile.builder()
+                .id(profileDTO.getId())
+                .bio(profileDTO.getBio())
+                .company(profileDTO.getCompany())
+                .createdAt(profileDTO.getCreatedAt())
+                .status(profileDTO.getStatus())
+                .website(profileDTO.getWebsite())
+                .githubUsername(profileDTO.getGithubUsername())
+                .location(profileDTO.getLocation())
+                .user(userMapper.fromUserDTO(userDTO))
+                .build();
     }
 
     public ProfileDTO fromProfile(Profile profile) {
@@ -36,7 +51,6 @@ public class ProfileMapper {
             .company(profile.getCompany())
             .location(profile.getLocation())
             .createdAt(profile.getCreatedAt())
-            .userDTO(userMapper.fromUser(profile.getUser()))
             .build();
     }
 }

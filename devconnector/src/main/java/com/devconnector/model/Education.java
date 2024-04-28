@@ -26,8 +26,13 @@ public class Education {
     private Instant toDate;
     private boolean current;
     private String description;
+    private Instant createdAt;
 
     @ManyToOne
     @JoinColumn(name = "profile_id", referencedColumnName = "profile_id", nullable = true)
     private Profile profile;
+
+    public boolean getCurrent() {
+        return current;
+    }
 }

@@ -14,6 +14,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,6 +50,7 @@ public class CommentServiceImpl implements CommentService {
             throw new AppException("Post not found", HttpStatus.NOT_FOUND);
         }
 
+        commentDTO.setCreatedAt(Instant.now());
         Comment savedComment = commentRepository.save(commentMapper.fromCommentDTO(commentDTO, post, user));
 
         return commentMapper.fromComment(savedComment);
@@ -60,7 +63,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public void deleteCommentById(Long id) {
-
+        commentRepository.deleteById(id);
     }
 
     @Override

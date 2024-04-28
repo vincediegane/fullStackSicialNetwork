@@ -18,6 +18,7 @@ public class EducationDTO {
     private Instant toDate;
     private boolean current;
     private String description;
+    private Instant createdAt;
 
     public boolean getCurrent() {
         return current;

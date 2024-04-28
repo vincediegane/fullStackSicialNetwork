@@ -7,14 +7,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserMapper {
     public User fromUserDTO(UserDTO userDTO) {
-        User user = User.builder()
+        return User.builder()
+            .id(userDTO.getId())
+            .email(userDTO.getEmail())
+            .firstName(userDTO.getFirstName())
+            .lastName(userDTO.getLastName())
+            .createdAt(userDTO.getCreatedAt())
+            .role(userDTO.getRole())
+            .password(userDTO.getPassword())
             .build();
-
-        return user;
     }
 
     public UserDTO fromUser(User user) {
-        UserDTO userDTO = UserDTO.builder()
+        return UserDTO.builder()
             .id(user.getId())
             .email(user.getEmail())
             .firstName(user.getFirstName())
@@ -23,6 +28,5 @@ public class UserMapper {
             .role(user.getRole())
             .createdAt(user.getCreatedAt())
             .build();
-        return userDTO;
     }
 }

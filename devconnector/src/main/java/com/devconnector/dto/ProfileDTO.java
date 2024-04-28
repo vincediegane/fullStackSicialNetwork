@@ -16,6 +16,5 @@ public class ProfileDTO {
     private String status;
     private String bio;
     private String githubUsername;
-    private UserDTO userDTO;
     private Instant createdAt;
 }
