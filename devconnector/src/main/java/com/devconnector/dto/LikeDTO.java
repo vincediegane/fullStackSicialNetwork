@@ -14,6 +14,6 @@ import java.time.Instant;
 public class LikeDTO {
     private Long id;
     private Instant likedAt;
-    private User user;
-    private Post post;
+    private UserDTO userDTO;
+    private PostDTO postDTO;
 }

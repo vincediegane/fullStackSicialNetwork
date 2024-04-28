@@ -1,7 +1,11 @@
 package com.devconnector.mapper;
 
 import com.devconnector.dto.LikeDTO;
+import com.devconnector.dto.PostDTO;
+import com.devconnector.dto.UserDTO;
 import com.devconnector.model.Like;
+import com.devconnector.model.Post;
+import com.devconnector.model.User;
 import org.springframework.stereotype.Service;
 
 @Service
