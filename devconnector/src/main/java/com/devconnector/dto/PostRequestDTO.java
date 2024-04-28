@@ -2,8 +2,6 @@ package com.devconnector.dto;
 
 import lombok.*;
 
-import java.time.Instant;
-
 @Getter
 @Setter
 @NoArgsConstructor

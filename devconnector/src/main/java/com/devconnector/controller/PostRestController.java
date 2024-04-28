@@ -32,6 +32,12 @@ public class PostRestController {
         return postService.addPost(postRequestDTO, connectedUser);
     }
 
+    @PutMapping("/{id}")
+    public PostDTO updatePost(@PathVariable Long id, @RequestBody PostRequestDTO postRequestDTO, Authentication connectedUser) {
+        postRequestDTO.setId(id);
+        return postService.updatePost(postRequestDTO, connectedUser);
+    }
+
     @PostMapping("/like/{postId}")
     public ResponseEntity<String> likePost(@PathVariable Long postId, Authentication connectedUser) {
         postService.like(postId, connectedUser);

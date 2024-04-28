@@ -12,6 +12,5 @@ public interface PostService {
     PostDTO addPost(PostRequestDTO postRequestDTO, Authentication connectedUser);
     void deletePostById(Long id);
     void like(Long postId, Authentication connectedUser);
-//    void unlike(Long postId, Authentication connectedUser);
-    PostDTO comment(Long postId, Authentication connectedUser);
+    PostDTO updatePost(PostRequestDTO postRequestDTO, Authentication connectedUser);
 }
