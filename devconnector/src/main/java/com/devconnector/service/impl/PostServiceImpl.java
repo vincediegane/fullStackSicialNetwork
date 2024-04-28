@@ -49,7 +49,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostDTO like(Long postId, Authentication connectedUser) {
+    public void like(Long postId, Authentication connectedUser) {
         User user = (User) connectedUser.getPrincipal();
 
         Post post = postMapper.fromPostDTO(findById(postId));
@@ -64,20 +64,16 @@ public class PostServiceImpl implements PostService {
             throw new AppException("User already liked this post", HttpStatus.BAD_REQUEST);
         }
 
-        Like like = new Like();
-        like.setPost(post);
-        like.setUser(user);
-        like.setLikedAt(Instant.now());
+        Like like = Like.builder()
+            .likedAt(Instant.now())
+            .post(post)
+            .user(user)
+            .build();
         Like savedLike = likeRepository.save(like);
-
-        post.getLikes().add(savedLike);
-        postRepository.save(post);
-
-        return postMapper.fromPost(post);
     }
 
     @Override
-    public PostDTO unlike(Long postId, Authentication connectedUser) {
+    public void unlike(Long postId, Authentication connectedUser) {
         User user = (User) connectedUser.getPrincipal();
 
         Post post = postMapper.fromPostDTO(findById(postId));
@@ -90,14 +86,11 @@ public class PostServiceImpl implements PostService {
         }
 
         Like like = post.getLikes().stream().filter(l -> l.getUser().getId().equals(user.getId()))
-                .findFirst()
-                .orElseThrow(() ->
-                        new AppException("Like not found", HttpStatus.BAD_REQUEST));
+            .findFirst()
+            .orElseThrow(() ->
+                new AppException("Like not found", HttpStatus.BAD_REQUEST));
 
-        post.getLikes().remove(like);
-        postRepository.save(post);
-
-        return postMapper.fromPost(post);
+        likeRepository.deleteById(like.getId());
     }
 
     @Override

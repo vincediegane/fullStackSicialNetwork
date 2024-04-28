@@ -2,12 +2,11 @@ package com.devconnector.controller;
 
 import com.devconnector.dto.PostDTO;
 import com.devconnector.dto.PostRequestDTO;
-import com.devconnector.model.Post;
 import com.devconnector.service.PostService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @AllArgsConstructor
@@ -32,12 +31,14 @@ public class PostRestController {
     }
 
     @PutMapping("/like/{postId}")
-    public PostDTO likePost(@PathVariable Long postId, Authentication connectedUser) {
-        return postService.like(postId, connectedUser);
+    public ResponseEntity<String> likePost(@PathVariable Long postId, Authentication connectedUser) {
+        postService.like(postId, connectedUser);
+        return ResponseEntity.ok("Liked");
     }
 
     @PutMapping("/unlike/{postId}")
-    public PostDTO unlikePost(@PathVariable Long postId, Authentication connectedUser) {
-        return postService.unlike(postId, connectedUser);
+    public ResponseEntity<String> unlikePost(@PathVariable Long postId, Authentication connectedUser) {
+        postService.unlike(postId, connectedUser);
+        return ResponseEntity.ok("Unliked");
     }
 }
