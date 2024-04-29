@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { AdminTemplateComponent } from './admin-template/admin-template.component';
-import { AuthGuard } from './guard/auth.guard';
+import { AuthGuard } from './guard/auth/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },

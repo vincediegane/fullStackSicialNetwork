@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AppUser } from '../models/user.model';
-import { Role } from '../enums/role.enum';
 import { Observable, of, throwError } from 'rxjs';
+import { Role } from 'src/app/enums/role.enum';
+import { AppUser } from 'src/app/models/user.model';
 
 @Injectable({
   providedIn: 'root'
