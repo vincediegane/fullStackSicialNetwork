@@ -25,12 +25,12 @@
       <div class="alert alert-danger" *ngIf="false">Invalid credentials</div>
       <h1 class="large text-primary">Sign In</h1>
       <p class="lead"><i class="fas fa-user"></i> Sign into Your Account</p>
-      <form class="form" style="width: 800px !important; ">
+      <form class="form" style="width: 800px !important;" [formGroup]="userFormGroup" (ngSubmit)="login()">
         <div class="form-group">
-          <input type="email" placeholder="Email Address" name="email" required />
+          <input type="email" placeholder="Email Address" name="email" required formControlName="email" />
         </div>
         <div class="form-group">
-          <input type="password" placeholder="Password" name="password" />
+          <input type="password" placeholder="Password" name="password" formControlName="password"/>
         </div>
         <input type="submit" class="btn btn-primary" value="Login" />
       </form>
