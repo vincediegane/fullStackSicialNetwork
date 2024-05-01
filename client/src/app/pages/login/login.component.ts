@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthRequestDto, AuthResponseDto } from 'src/app/services/models';
 import { AuthApiService } from 'src/app/services/services';
 
 @Component({
@@ -9,8 +10,10 @@ import { AuthApiService } from 'src/app/services/services';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  authRequest: AuthRequestDto = { email: '', password: '' };
   errorMessage: string = "";
   userFormGroup!: FormGroup;
+  authResponse!: string | undefined;
 
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthApiService) { }
 
@@ -22,15 +25,16 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    let email = this.userFormGroup.value.email;
-    let password = this.userFormGroup.value.password;
+    this.authRequest.email = this.userFormGroup.value.email;
+    this.authRequest.password = this.userFormGroup.value.password;
+
 
     this.authService.authenticate({
-      body: {email, password}
+      body: this.authRequest
     }).subscribe({
-      next: (res) => {
-        debugger
-        console.log(res);
+      next: (res: AuthResponseDto) => {
+        this.authResponse = res.token;
+        console.log(this.authResponse);
       },
       error: (err) => {
         console.log(err);
@@ -41,5 +45,4 @@ export class LoginComponent implements OnInit {
   register() {
     this.router.navigateByUrl("/register");
   }
-
 }
