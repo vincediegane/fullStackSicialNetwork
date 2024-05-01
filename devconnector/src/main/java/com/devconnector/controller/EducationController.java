@@ -1,7 +1,6 @@
 package com.devconnector.controller;
 
 import com.devconnector.dto.EducationDTO;
-import com.devconnector.dto.ProfileDTO;
 import com.devconnector.service.EducationService;
 import com.devconnector.service.ProfileService;
 import lombok.AllArgsConstructor;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/educations")
+@RequestMapping("/api/v1/educations")
 @AllArgsConstructor
 public class EducationController {
     private final EducationService educationService;

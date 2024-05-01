@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthRequestDto, AuthResponseDto } from 'src/app/services/models';
 import { AuthApiService } from 'src/app/services/services';
+import { TokenService } from 'src/app/services/services/token.service';
 
 @Component({
   selector: 'app-login',
@@ -10,12 +11,15 @@ import { AuthApiService } from 'src/app/services/services';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  authRequest: AuthRequestDto = { email: '', password: '' };
   errorMessage: string = "";
   userFormGroup!: FormGroup;
-  authResponse!: string | undefined;
 
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthApiService) { }
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthApiService,
+    private tokenService: TokenService
+  ) { }
 
   ngOnInit(): void {
     this.userFormGroup = this.fb.group({
@@ -25,16 +29,14 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.authRequest.email = this.userFormGroup.value.email;
-    this.authRequest.password = this.userFormGroup.value.password;
-
+    let { email, password } = this.userFormGroup.value;
 
     this.authService.authenticate({
-      body: this.authRequest
+      body: { email, password }
     }).subscribe({
       next: (res: AuthResponseDto) => {
-        this.authResponse = res.token;
-        console.log(this.authResponse);
+        this.tokenService.token = res.token as string;
+        this.router.navigateByUrl("/home");
       },
       error: (err) => {
         console.log(err);

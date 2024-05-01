@@ -13,7 +13,7 @@ public class GithubUserRepoController {
 
     private final GithubUserRepoService githubService;
 
-    @GetMapping("/github/{username}")
+    @GetMapping("/api/v1/github/{username}")
     public ResponseEntity<Object[]> getGithubRepos(@PathVariable String username) {
         return ResponseEntity.ok(githubService.getGithubRepos(username));
     }

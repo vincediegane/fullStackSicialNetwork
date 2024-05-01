@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/experiences")
+@RequestMapping("/api/v1/experiences")
 @AllArgsConstructor
 public class ExperienceController {
     private final ExperienceService experienceService;
