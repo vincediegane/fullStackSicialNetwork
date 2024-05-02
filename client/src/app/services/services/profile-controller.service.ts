@@ -32,7 +32,7 @@ export class ProfileControllerService extends BaseService {
   }
 
   /** Path part for operation `getProfile()` */
-  static readonly GetProfilePath = '/profiles/{id}';
+  static readonly GetProfilePath = '/api/v1/profiles/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -57,7 +57,7 @@ export class ProfileControllerService extends BaseService {
   }
 
   /** Path part for operation `updateProfile()` */
-  static readonly UpdateProfilePath = '/profiles/{id}';
+  static readonly UpdateProfilePath = '/api/v1/profiles/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -82,7 +82,7 @@ export class ProfileControllerService extends BaseService {
   }
 
   /** Path part for operation `deleteProfile()` */
-  static readonly DeleteProfilePath = '/profiles/{id}';
+  static readonly DeleteProfilePath = '/api/v1/profiles/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -107,7 +107,7 @@ export class ProfileControllerService extends BaseService {
   }
 
   /** Path part for operation `getProfiles()` */
-  static readonly GetProfilesPath = '/profiles/';
+  static readonly GetProfilesPath = '/api/v1/profiles/';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -132,7 +132,7 @@ export class ProfileControllerService extends BaseService {
   }
 
   /** Path part for operation `addProfile()` */
-  static readonly AddProfilePath = '/profiles/';
+  static readonly AddProfilePath = '/api/v1/profiles/';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -157,7 +157,7 @@ export class ProfileControllerService extends BaseService {
   }
 
   /** Path part for operation `getUserProfile()` */
-  static readonly GetUserProfilePath = '/profiles/users/{userId}';
+  static readonly GetUserProfilePath = '/api/v1/profiles/users/{userId}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -182,7 +182,7 @@ export class ProfileControllerService extends BaseService {
   }
 
   /** Path part for operation `getCurrentProfile()` */
-  static readonly GetCurrentProfilePath = '/profiles/me';
+  static readonly GetCurrentProfilePath = '/api/v1/profiles/me';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.

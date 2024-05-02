@@ -24,7 +24,7 @@ export class LikeControllerService extends BaseService {
   }
 
   /** Path part for operation `findById()` */
-  static readonly FindByIdPath = '/likes/{likeId}';
+  static readonly FindByIdPath = '/api/v1/likes/{likeId}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -49,7 +49,7 @@ export class LikeControllerService extends BaseService {
   }
 
   /** Path part for operation `findLikeByPost()` */
-  static readonly FindLikeByPostPath = '/likes/post/{postId}';
+  static readonly FindLikeByPostPath = '/api/v1/likes/post/{postId}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -74,7 +74,7 @@ export class LikeControllerService extends BaseService {
   }
 
   /** Path part for operation `findAll()` */
-  static readonly FindAllPath = '/likes/';
+  static readonly FindAllPath = '/api/v1/likes/';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.

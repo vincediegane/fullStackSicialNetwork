@@ -14,6 +14,8 @@ import { Authenticate$Params } from '../fn/auth-api/authenticate';
 import { AuthResponseDto } from '../models/auth-response-dto';
 import { getCurrentUser } from '../fn/auth-api/get-current-user';
 import { GetCurrentUser$Params } from '../fn/auth-api/get-current-user';
+import { getUserByProfile } from '../fn/auth-api/get-user-by-profile';
+import { GetUserByProfile$Params } from '../fn/auth-api/get-user-by-profile';
 import { register } from '../fn/auth-api/register';
 import { Register$Params } from '../fn/auth-api/register';
 import { UserDto } from '../models/user-dto';
@@ -87,6 +89,31 @@ export class AuthApiService extends BaseService {
   authenticate(params: Authenticate$Params, context?: HttpContext): Observable<AuthResponseDto> {
     return this.authenticate$Response(params, context).pipe(
       map((r: StrictHttpResponse<AuthResponseDto>): AuthResponseDto => r.body)
+    );
+  }
+
+  /** Path part for operation `getUserByProfile()` */
+  static readonly GetUserByProfilePath = '/api/v1/auth/user/profile/{profileId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getUserByProfile()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getUserByProfile$Response(params: GetUserByProfile$Params, context?: HttpContext): Observable<StrictHttpResponse<UserDto>> {
+    return getUserByProfile(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getUserByProfile$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getUserByProfile(params: GetUserByProfile$Params, context?: HttpContext): Observable<UserDto> {
+    return this.getUserByProfile$Response(params, context).pipe(
+      map((r: StrictHttpResponse<UserDto>): UserDto => r.body)
     );
   }
 

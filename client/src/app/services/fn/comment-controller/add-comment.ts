@@ -19,7 +19,7 @@ export function addComment(http: HttpClient, rootUrl: string, params: AddComment
   }
 
   return http.request(
-    rb.build({ responseType: 'blob', accept: '*/*', context })
+    rb.build({ responseType: 'json', accept: '*/*', context })
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
@@ -28,4 +28,4 @@ export function addComment(http: HttpClient, rootUrl: string, params: AddComment
   );
 }
 
-addComment.PATH = '/comments/';
+addComment.PATH = '/api/v1/comments/';

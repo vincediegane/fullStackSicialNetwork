@@ -18,7 +18,7 @@ export function deleteComment(http: HttpClient, rootUrl: string, params: DeleteC
   }
 
   return http.request(
-    rb.build({ responseType: 'blob', accept: '*/*', context })
+    rb.build({ responseType: 'json', accept: '*/*', context })
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
@@ -27,4 +27,4 @@ export function deleteComment(http: HttpClient, rootUrl: string, params: DeleteC
   );
 }
 
-deleteComment.PATH = '/comments/{commentId}';
+deleteComment.PATH = '/api/v1/comments/{commentId}';

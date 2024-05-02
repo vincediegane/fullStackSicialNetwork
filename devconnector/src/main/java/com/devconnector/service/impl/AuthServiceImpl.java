@@ -1,14 +1,14 @@
 package com.devconnector.service.impl;
 
 import com.devconnector.config.JwtService;
-import com.devconnector.dto.UserDTO;
+import com.devconnector.dto.*;
 import com.devconnector.enumeration.Role;
-import com.devconnector.dto.AuthRequestDTO;
-import com.devconnector.dto.AuthResponseDTO;
-import com.devconnector.dto.RegisterRequestDTO;
 import com.devconnector.exception.AppException;
+import com.devconnector.mapper.SkillMapper;
 import com.devconnector.mapper.UserMapper;
+import com.devconnector.model.Skill;
 import com.devconnector.model.User;
+import com.devconnector.repository.SkillRepository;
 import com.devconnector.repository.UserRepository;
 import com.devconnector.service.AuthService;
 import lombok.AllArgsConstructor;
@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 
 import java.nio.CharBuffer;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,7 +36,9 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
-    private UserMapper userMapper;
+    private final UserMapper userMapper;
+    private final SkillMapper skillMapper;
+    private final SkillRepository skillRepository;
 
     @Override
     public AuthResponseDTO register(RegisterRequestDTO request) {
@@ -50,13 +53,11 @@ public class AuthServiceImpl implements AuthService {
             .build();
         userRepository.save(user);
 
-        // Added
         Map<String, Object> claims = new HashMap<>();
         claims.put("firstName", user.getFirstName());
         claims.put("lastName", user.getLastName());
         claims.put("role", user.getRole());
 
-//  First      var jwtToken = jwtService.generateToken(user);
         var jwtToken = jwtService.generateToken(claims, user);
         return AuthResponseDTO.builder()
             .token(jwtToken)
@@ -74,14 +75,12 @@ public class AuthServiceImpl implements AuthService {
         var user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow();
 
-        //Added
         Map<String, Object> claims = new HashMap<>();
         claims.put("firstName", user.getFirstName());
         claims.put("lastName", user.getLastName());
         claims.put("role", user.getRole());
 
         if(passwordEncoder.matches(CharBuffer.wrap(request.getPassword()), user.getPassword())) {
-//  First          var jwtToken = jwtService.generateToken(user);
             var jwtToken = jwtService.generateToken(claims, user);
             return AuthResponseDTO.builder()
                     .token(jwtToken)
@@ -103,5 +102,11 @@ public class AuthServiceImpl implements AuthService {
             return userMapper.fromUser(currentUser);
         }
         throw new AppException("No auth user found", HttpStatus.FORBIDDEN);
+    }
+
+    @Override
+    public UserDTO getUserByProfile(Long profileId) {
+        User user = userRepository.findByProfileId(profileId);
+        return userMapper.fromUser(user);
     }
 }

@@ -19,7 +19,7 @@ export class GithubUserRepoControllerService extends BaseService {
   }
 
   /** Path part for operation `getGithubRepos()` */
-  static readonly GetGithubReposPath = '/github/{username}';
+  static readonly GetGithubReposPath = '/api/v1/github/{username}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.

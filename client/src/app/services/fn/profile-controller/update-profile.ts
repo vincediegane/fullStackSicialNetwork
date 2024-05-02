@@ -21,7 +21,7 @@ export function updateProfile(http: HttpClient, rootUrl: string, params: UpdateP
   }
 
   return http.request(
-    rb.build({ responseType: 'blob', accept: '*/*', context })
+    rb.build({ responseType: 'json', accept: '*/*', context })
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
@@ -30,4 +30,4 @@ export function updateProfile(http: HttpClient, rootUrl: string, params: UpdateP
   );
 }
 
-updateProfile.PATH = '/profiles/{id}';
+updateProfile.PATH = '/api/v1/profiles/{id}';

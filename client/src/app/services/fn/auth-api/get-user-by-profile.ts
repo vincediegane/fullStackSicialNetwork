@@ -6,16 +6,16 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { EducationDto } from '../../models/education-dto';
+import { UserDto } from '../../models/user-dto';
 
-export interface AddEducation$Params {
-      body: EducationDto
+export interface GetUserByProfile$Params {
+  profileId: number;
 }
 
-export function addEducation(http: HttpClient, rootUrl: string, params: AddEducation$Params, context?: HttpContext): Observable<StrictHttpResponse<EducationDto>> {
-  const rb = new RequestBuilder(rootUrl, addEducation.PATH, 'post');
+export function getUserByProfile(http: HttpClient, rootUrl: string, params: GetUserByProfile$Params, context?: HttpContext): Observable<StrictHttpResponse<UserDto>> {
+  const rb = new RequestBuilder(rootUrl, getUserByProfile.PATH, 'get');
   if (params) {
-    rb.body(params.body, 'application/json');
+    rb.path('profileId', params.profileId, {});
   }
 
   return http.request(
@@ -23,9 +23,9 @@ export function addEducation(http: HttpClient, rootUrl: string, params: AddEduca
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<EducationDto>;
+      return r as StrictHttpResponse<UserDto>;
     })
   );
 }
 
-addEducation.PATH = '/api/v1/educations/';
+getUserByProfile.PATH = '/api/v1/auth/user/profile/{profileId}';

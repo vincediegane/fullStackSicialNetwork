@@ -31,7 +31,100 @@
     }
   ],
   "paths": {
-    "/profiles/{id}": {
+    "/api/v1/skills/{skillId}": {
+      "get": {
+        "tags": ["skill-controller"],
+        "operationId": "getSkill",
+        "parameters": [
+          {
+            "name": "skillId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/SkillDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["skill-controller"],
+        "operationId": "updateSkill",
+        "parameters": [
+          {
+            "name": "skillId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SkillDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/SkillDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["skill-controller"],
+        "operationId": "deleteSkill",
+        "parameters": [
+          {
+            "name": "skillId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/profiles/{id}": {
       "get": {
         "tags": ["profile-controller"],
         "operationId": "getProfile",
@@ -124,7 +217,73 @@
         }
       }
     },
-    "/experiences/{id}": {
+    "/api/v1/posts/{id}": {
+      "get": {
+        "tags": ["post-rest-controller"],
+        "operationId": "getPostById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["post-rest-controller"],
+        "operationId": "updatePost",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostRequestDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/experiences/{id}": {
       "get": {
         "tags": ["experience-controller"],
         "operationId": "getExperience",
@@ -217,7 +376,7 @@
         }
       }
     },
-    "/educations/{id}": {
+    "/api/v1/educations/{id}": {
       "get": {
         "tags": ["education-controller"],
         "operationId": "getEducation",
@@ -310,53 +469,15 @@
         }
       }
     },
-    "/api/v1/posts/{id}": {
-      "get": {
-        "tags": ["post-rest-controller"],
-        "operationId": "getPostById",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/PostDTO"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": ["post-rest-controller"],
-        "operationId": "updatePost",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
+    "/api/v1/skills/add": {
+      "post": {
+        "tags": ["skill-controller"],
+        "operationId": "addSkill",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PostRequestDTO"
+                "$ref": "#/components/schemas/SkillDTO"
               }
             }
           },
@@ -368,7 +489,7 @@
             "content": {
               "*/*": {
                 "schema": {
-                  "$ref": "#/components/schemas/PostDTO"
+                  "$ref": "#/components/schemas/SkillDTO"
                 }
               }
             }
@@ -376,7 +497,7 @@
         }
       }
     },
-    "/profiles/": {
+    "/api/v1/profiles/": {
       "get": {
         "tags": ["profile-controller"],
         "operationId": "getProfiles",
@@ -416,147 +537,6 @@
               "*/*": {
                 "schema": {
                   "$ref": "#/components/schemas/ProfileDTO"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/experiences/": {
-      "get": {
-        "tags": ["experience-controller"],
-        "operationId": "getExperiences",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ExperienceDTO"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": ["experience-controller"],
-        "operationId": "addExperience",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ExperienceDTO"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExperienceDTO"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/educations/": {
-      "get": {
-        "tags": ["education-controller"],
-        "operationId": "getEducations",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/EducationDTO"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": ["education-controller"],
-        "operationId": "addEducation",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/EducationDTO"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/EducationDTO"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/comments/": {
-      "get": {
-        "tags": ["comment-controller"],
-        "operationId": "findAll_1",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/CommentDTO"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": ["comment-controller"],
-        "operationId": "addComment",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CommentDTO"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommentDTO"
                 }
               }
             }
@@ -669,6 +649,147 @@
         }
       }
     },
+    "/api/v1/experiences/": {
+      "get": {
+        "tags": ["experience-controller"],
+        "operationId": "getExperiences",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExperienceDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["experience-controller"],
+        "operationId": "addExperience",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExperienceDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExperienceDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/educations/": {
+      "get": {
+        "tags": ["education-controller"],
+        "operationId": "getEducations",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EducationDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["education-controller"],
+        "operationId": "addEducation",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EducationDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/EducationDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/comments/": {
+      "get": {
+        "tags": ["comment-controller"],
+        "operationId": "findAll_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CommentDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["comment-controller"],
+        "operationId": "addComment",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommentDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/auth/register": {
       "post": {
         "tags": ["Auth API"],
@@ -749,7 +870,60 @@
         }
       }
     },
-    "/profiles/users/{userId}": {
+    "/api/v1/skills/user/{userId}": {
+      "get": {
+        "tags": ["skill-controller"],
+        "operationId": "getSkillByUser",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SkillDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/skills/": {
+      "get": {
+        "tags": ["skill-controller"],
+        "operationId": "getSkills",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SkillDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/profiles/users/{userId}": {
       "get": {
         "tags": ["profile-controller"],
         "operationId": "getUserProfile",
@@ -778,7 +952,7 @@
         }
       }
     },
-    "/profiles/me": {
+    "/api/v1/profiles/me": {
       "get": {
         "tags": ["profile-controller"],
         "operationId": "getCurrentProfile",
@@ -796,7 +970,7 @@
         }
       }
     },
-    "/likes/{likeId}": {
+    "/api/v1/likes/{likeId}": {
       "get": {
         "tags": ["like-controller"],
         "operationId": "findById",
@@ -825,7 +999,7 @@
         }
       }
     },
-    "/likes/post/{postId}": {
+    "/api/v1/likes/post/{postId}": {
       "get": {
         "tags": ["like-controller"],
         "operationId": "findLikeByPost",
@@ -857,7 +1031,7 @@
         }
       }
     },
-    "/likes/": {
+    "/api/v1/likes/": {
       "get": {
         "tags": ["like-controller"],
         "operationId": "findAll",
@@ -878,7 +1052,7 @@
         }
       }
     },
-    "/github/{username}": {
+    "/api/v1/github/{username}": {
       "get": {
         "tags": ["github-user-repo-controller"],
         "operationId": "getGithubRepos",
@@ -909,7 +1083,7 @@
         }
       }
     },
-    "/comments/{id}": {
+    "/api/v1/comments/{id}": {
       "get": {
         "tags": ["comment-controller"],
         "operationId": "getComment",
@@ -938,7 +1112,7 @@
         }
       }
     },
-    "/comments/posts/{postId}": {
+    "/api/v1/comments/posts/{postId}": {
       "get": {
         "tags": ["comment-controller"],
         "operationId": "getCommentsByPost",
@@ -963,6 +1137,35 @@
                   "items": {
                     "$ref": "#/components/schemas/CommentDTO"
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/user/profile/{profileId}": {
+      "get": {
+        "tags": ["Auth API"],
+        "operationId": "getUserByProfile",
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDTO"
                 }
               }
             }
@@ -1000,7 +1203,7 @@
         }
       }
     },
-    "/comments/{commentId}": {
+    "/api/v1/comments/{commentId}": {
       "delete": {
         "tags": ["comment-controller"],
         "operationId": "deleteComment",
@@ -1032,6 +1235,21 @@
   },
   "components": {
     "schemas": {
+      "SkillDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "label": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
       "ProfileDTO": {
         "type": "object",
         "properties": {
@@ -1056,6 +1274,72 @@
           },
           "githubUsername": {
             "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "PostRequestDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "title": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          }
+        }
+      },
+      "PostDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "title": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "userDTO": {
+            "$ref": "#/components/schemas/UserDTO"
+          }
+        }
+      },
+      "UserDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string",
+            "enum": ["USER", "ADMIN"]
           },
           "createdAt": {
             "type": "string",
@@ -1128,72 +1412,6 @@
           },
           "description": {
             "type": "string"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "PostRequestDTO": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "title": {
-            "type": "string"
-          },
-          "body": {
-            "type": "string"
-          }
-        }
-      },
-      "PostDTO": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "title": {
-            "type": "string"
-          },
-          "body": {
-            "type": "string"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "userDTO": {
-            "$ref": "#/components/schemas/UserDTO"
-          }
-        }
-      },
-      "UserDTO": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "email": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          },
-          "firstName": {
-            "type": "string"
-          },
-          "lastName": {
-            "type": "string"
-          },
-          "role": {
-            "type": "string",
-            "enum": ["USER", "ADMIN"]
           },
           "createdAt": {
             "type": "string",

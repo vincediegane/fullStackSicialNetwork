@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthRequestDto, AuthResponseDto } from 'src/app/services/models';
+import { AuthResponseDto } from 'src/app/services/models';
 import { AuthApiService } from 'src/app/services/services';
 import { TokenService } from 'src/app/services/services/token.service';
 

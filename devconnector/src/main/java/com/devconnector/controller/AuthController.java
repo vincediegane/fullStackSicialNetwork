@@ -1,9 +1,6 @@
 package com.devconnector.controller;
 
-import com.devconnector.dto.AuthRequestDTO;
-import com.devconnector.dto.AuthResponseDTO;
-import com.devconnector.dto.RegisterRequestDTO;
-import com.devconnector.dto.UserDTO;
+import com.devconnector.dto.*;
 import com.devconnector.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -77,4 +74,10 @@ public class AuthController {
     public ResponseEntity<AuthResponseDTO> authenticate(@RequestBody AuthRequestDTO request) {
         return ResponseEntity.ok(authService.authenticate(request));
     }
+
+    @GetMapping("/user/profile/{profileId}")
+    public UserDTO getUserByProfile(@PathVariable Long profileId) {
+        return authService.getUserByProfile(profileId);
+    }
+    
 }

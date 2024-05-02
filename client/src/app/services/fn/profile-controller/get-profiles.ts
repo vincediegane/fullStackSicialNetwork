@@ -17,7 +17,7 @@ export function getProfiles(http: HttpClient, rootUrl: string, params?: GetProfi
   }
 
   return http.request(
-    rb.build({ responseType: 'blob', accept: '*/*', context })
+    rb.build({ responseType: 'json', accept: '*/*', context })
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
@@ -26,4 +26,4 @@ export function getProfiles(http: HttpClient, rootUrl: string, params?: GetProfi
   );
 }
 
-getProfiles.PATH = '/profiles/';
+getProfiles.PATH = '/api/v1/profiles/';

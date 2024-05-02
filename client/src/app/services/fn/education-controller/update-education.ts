@@ -21,7 +21,7 @@ export function updateEducation(http: HttpClient, rootUrl: string, params: Updat
   }
 
   return http.request(
-    rb.build({ responseType: 'blob', accept: '*/*', context })
+    rb.build({ responseType: 'json', accept: '*/*', context })
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
@@ -30,4 +30,4 @@ export function updateEducation(http: HttpClient, rootUrl: string, params: Updat
   );
 }
 
-updateEducation.PATH = '/educations/{id}';
+updateEducation.PATH = '/api/v1/educations/{id}';

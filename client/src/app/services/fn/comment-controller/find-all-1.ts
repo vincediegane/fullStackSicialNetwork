@@ -17,7 +17,7 @@ export function findAll1(http: HttpClient, rootUrl: string, params?: FindAll1$Pa
   }
 
   return http.request(
-    rb.build({ responseType: 'blob', accept: '*/*', context })
+    rb.build({ responseType: 'json', accept: '*/*', context })
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
@@ -26,4 +26,4 @@ export function findAll1(http: HttpClient, rootUrl: string, params?: FindAll1$Pa
   );
 }
 
-findAll1.PATH = '/comments/';
+findAll1.PATH = '/api/v1/comments/';

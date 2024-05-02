@@ -28,7 +28,7 @@ export class CommentControllerService extends BaseService {
   }
 
   /** Path part for operation `findAll1()` */
-  static readonly FindAll1Path = '/comments/';
+  static readonly FindAll1Path = '/api/v1/comments/';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -53,7 +53,7 @@ export class CommentControllerService extends BaseService {
   }
 
   /** Path part for operation `addComment()` */
-  static readonly AddCommentPath = '/comments/';
+  static readonly AddCommentPath = '/api/v1/comments/';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -78,7 +78,7 @@ export class CommentControllerService extends BaseService {
   }
 
   /** Path part for operation `getComment()` */
-  static readonly GetCommentPath = '/comments/{id}';
+  static readonly GetCommentPath = '/api/v1/comments/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -103,7 +103,7 @@ export class CommentControllerService extends BaseService {
   }
 
   /** Path part for operation `getCommentsByPost()` */
-  static readonly GetCommentsByPostPath = '/comments/posts/{postId}';
+  static readonly GetCommentsByPostPath = '/api/v1/comments/posts/{postId}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -128,7 +128,7 @@ export class CommentControllerService extends BaseService {
   }
 
   /** Path part for operation `deleteComment()` */
-  static readonly DeleteCommentPath = '/comments/{commentId}';
+  static readonly DeleteCommentPath = '/api/v1/comments/{commentId}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.

@@ -63,6 +63,9 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Like> likes;
 
+    @ManyToMany(mappedBy = "users")
+    private List<Skill> skills;
+
     private Instant createdAt;
 
     @Override

@@ -4,10 +4,11 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
+import { SkillControllerService } from './services/skill-controller.service';
 import { ProfileControllerService } from './services/profile-controller.service';
+import { PostRestControllerService } from './services/post-rest-controller.service';
 import { ExperienceControllerService } from './services/experience-controller.service';
 import { EducationControllerService } from './services/education-controller.service';
-import { PostRestControllerService } from './services/post-rest-controller.service';
 import { CommentControllerService } from './services/comment-controller.service';
 import { AuthApiService } from './services/auth-api.service';
 import { LikeControllerService } from './services/like-controller.service';
@@ -21,10 +22,11 @@ import { GithubUserRepoControllerService } from './services/github-user-repo-con
   exports: [],
   declarations: [],
   providers: [
+    SkillControllerService,
     ProfileControllerService,
+    PostRestControllerService,
     ExperienceControllerService,
     EducationControllerService,
-    PostRestControllerService,
     CommentControllerService,
     AuthApiService,
     LikeControllerService,

@@ -1,12 +1,10 @@
 package com.devconnector.service.impl;
 
 import com.devconnector.dto.LikeDTO;
-import com.devconnector.dto.UserDTO;
 import com.devconnector.exception.AppException;
 import com.devconnector.mapper.LikeMapper;
 import com.devconnector.mapper.UserMapper;
 import com.devconnector.model.Like;
-import com.devconnector.model.User;
 import com.devconnector.repository.LikeRepository;
 import com.devconnector.service.LikeService;
 import jakarta.transaction.Transactional;

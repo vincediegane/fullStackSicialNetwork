@@ -28,7 +28,7 @@ export class EducationControllerService extends BaseService {
   }
 
   /** Path part for operation `getEducation()` */
-  static readonly GetEducationPath = '/educations/{id}';
+  static readonly GetEducationPath = '/api/v1/educations/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -53,7 +53,7 @@ export class EducationControllerService extends BaseService {
   }
 
   /** Path part for operation `updateEducation()` */
-  static readonly UpdateEducationPath = '/educations/{id}';
+  static readonly UpdateEducationPath = '/api/v1/educations/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -78,7 +78,7 @@ export class EducationControllerService extends BaseService {
   }
 
   /** Path part for operation `deleteEducation()` */
-  static readonly DeleteEducationPath = '/educations/{id}';
+  static readonly DeleteEducationPath = '/api/v1/educations/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -103,7 +103,7 @@ export class EducationControllerService extends BaseService {
   }
 
   /** Path part for operation `getEducations()` */
-  static readonly GetEducationsPath = '/educations/';
+  static readonly GetEducationsPath = '/api/v1/educations/';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -128,7 +128,7 @@ export class EducationControllerService extends BaseService {
   }
 
   /** Path part for operation `addEducation()` */
-  static readonly AddEducationPath = '/educations/';
+  static readonly AddEducationPath = '/api/v1/educations/';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.

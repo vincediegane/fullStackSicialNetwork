@@ -18,7 +18,7 @@ export function deleteExperience(http: HttpClient, rootUrl: string, params: Dele
   }
 
   return http.request(
-    rb.build({ responseType: 'blob', accept: '*/*', context })
+    rb.build({ responseType: 'json', accept: '*/*', context })
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
@@ -27,4 +27,4 @@ export function deleteExperience(http: HttpClient, rootUrl: string, params: Dele
   );
 }
 
-deleteExperience.PATH = '/experiences/{id}';
+deleteExperience.PATH = '/api/v1/experiences/{id}';

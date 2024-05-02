@@ -28,7 +28,7 @@ export class ExperienceControllerService extends BaseService {
   }
 
   /** Path part for operation `getExperience()` */
-  static readonly GetExperiencePath = '/experiences/{id}';
+  static readonly GetExperiencePath = '/api/v1/experiences/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -53,7 +53,7 @@ export class ExperienceControllerService extends BaseService {
   }
 
   /** Path part for operation `updateExperience()` */
-  static readonly UpdateExperiencePath = '/experiences/{id}';
+  static readonly UpdateExperiencePath = '/api/v1/experiences/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -78,7 +78,7 @@ export class ExperienceControllerService extends BaseService {
   }
 
   /** Path part for operation `deleteExperience()` */
-  static readonly DeleteExperiencePath = '/experiences/{id}';
+  static readonly DeleteExperiencePath = '/api/v1/experiences/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -103,7 +103,7 @@ export class ExperienceControllerService extends BaseService {
   }
 
   /** Path part for operation `getExperiences()` */
-  static readonly GetExperiencesPath = '/experiences/';
+  static readonly GetExperiencesPath = '/api/v1/experiences/';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -128,7 +128,7 @@ export class ExperienceControllerService extends BaseService {
   }
 
   /** Path part for operation `addExperience()` */
-  static readonly AddExperiencePath = '/experiences/';
+  static readonly AddExperiencePath = '/api/v1/experiences/';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
