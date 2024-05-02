@@ -10,4 +10,5 @@ export { PostDto } from './models/post-dto';
 export { PostRequestDto } from './models/post-request-dto';
 export { ProfileDto } from './models/profile-dto';
 export { RegisterRequestDto } from './models/register-request-dto';
+export { SkillDto } from './models/skill-dto';
 export { UserDto } from './models/user-dto';
