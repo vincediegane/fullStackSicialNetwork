@@ -1,19 +1,16 @@
-<div class="profile bg-light">
-    <img src="alt" alt="" class="round-img">
-    <div>
-        <h2>Vincent</h2>
-        <p>{{ profile.status }} <span> at {{ profile.company }}</span></p>
-        <p className='my-1'><span>{{ profile.location }}</span></p>
-        <button class="btn btn-primary" [routerLink]="">View Profile</button>
-    </div>
-    <!-- <ul>
-        { skills.slice(0, 4).map((skill, index) => (
-          <li key={index} className='text-primary'>
-            <i className='fas fa-check'></i>
-          </li>
-        )) }
-    </ul> -->
-    <ul *ngFor="let skill of skills">
+<span *ngIf="loading">Loading...</span>
+<div *ngIf="!loading" class="profile bg-light">
+  <img class="round-img" src="https://avatars.githubusercontent.com/u/17571380?v=4" alt="gravatar" />
+  <div>
+    <h2>{{ user.firstName }} {{ user.lastName }}</h2>
+    <p>{{ profile.company }}</p>
+    <p>{{ profile.location }}</p>
+    <a [routerLink]="[profile.id, 'details']" class="btn btn-primary">View Profile</a>
+  </div>
 
-    </ul>
+  <ul>
+    <li class="text-primary" *ngFor="let skill of skills">
+      <i class="fas fa-check"></i> {{ skill.label }}
+    </li>
+  </ul>
 </div>

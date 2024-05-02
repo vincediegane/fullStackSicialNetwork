@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ProfileDto } from 'src/app/services/models';
+import { Router } from '@angular/router';
+import { ProfileDto, SkillDto, UserDto } from 'src/app/services/models';
+import { AuthApiService, SkillControllerService } from 'src/app/services/services';
 
 @Component({
   selector: 'app-profile-item',
@@ -8,15 +10,48 @@ import { ProfileDto } from 'src/app/services/models';
 })
 export class ProfileItemComponent implements OnInit {
   @Input()
-  profile!: ProfileDto;
-  skills: any[] = [];
-  // profile: ProfileDto = { id: 0, bio: '', company: '', createdAt: '', githubUsername: '',  location: '', status: '', website: '' };
+  profile!: ProfileDto | any;
+  user!: UserDto;
+  skills: SkillDto[] = [];
+  loading: boolean = false;
   
-  constructor() { }
+  constructor(
+    private skillService: SkillControllerService,
+    private authService: AuthApiService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+    this.getUserByProfile(this.profile.id);
   }
 
-  getProfile() {}
+  getSkillsForUser(userId: number) {
+    this.skillService.getSkillByUser$Response({
+      userId
+    }).subscribe({
+      next: (res) => {
+        this.skills = res.body;
+      },
+      error: (err) => console.log(err)
+    });
+  }
+
+  getUserByProfile(profileId: number) {
+    this.loading = true;
+    this.authService.getUserByProfile({
+      profileId
+    }).subscribe({
+      next: (user) => {
+        this.user = user;
+        this.getSkillsForUser(this.user.id as number);
+        this.loading = false;
+      },
+      error: (err) => console.log(err)
+    });
+  }
+
+  goToProfileDetails() {
+    this.router.navigateByUrl("/");
+  }
 
 }

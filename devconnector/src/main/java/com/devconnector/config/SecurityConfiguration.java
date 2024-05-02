@@ -31,6 +31,7 @@ public class SecurityConfiguration {
         "api/v1/auth/user/profile/**",
         "api/v1/skills/**",
         "api/v1/skills/user/**",
+        "api/v1/auth/user/profile/**",
         "/v2/api-docs",
         "/v3/api-docs",
         "/v3/api-docs/**",

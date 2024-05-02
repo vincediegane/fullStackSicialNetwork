@@ -14,4 +14,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findByProfileId(Long profileId);
     @Query("SELECT u.skills FROM User u WHERE u.id = ?1")
     List<Skill> findSkillsByUserId(Long userId);
+//    @Query("SELECT u FROM User u JOIN u.profile p WHERE p.id = :profileId")
+//    User findUserByProfileId(Long profileId);
 }
