@@ -1,0 +1,19 @@
+<div class="profile bg-light">
+    <img src="alt" alt="" class="round-img">
+    <div>
+        <h2>Vincent</h2>
+        <p>{{ profile.status }} <span> at {{ profile.company }}</span></p>
+        <p className='my-1'><span>{{ profile.location }}</span></p>
+        <button class="btn btn-primary" [routerLink]="">View Profile</button>
+    </div>
+    <!-- <ul>
+        { skills.slice(0, 4).map((skill, index) => (
+          <li key={index} className='text-primary'>
+            <i className='fas fa-check'></i>
+          </li>
+        )) }
+    </ul> -->
+    <ul *ngFor="let skill of skills">
+
+    </ul>
+</div>
