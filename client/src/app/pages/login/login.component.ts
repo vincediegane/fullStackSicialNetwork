@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     }).subscribe({
       next: (res: AuthResponseDto) => {
         this.tokenService.token = res.token as string;
-        this.router.navigateByUrl("/home");
+        this.router.navigateByUrl("/dashboard");
       },
       error: (err) => {
         console.log(err);

@@ -26,7 +26,7 @@ public class DevconnectorApplication {
 	@Bean
 	public CommandLineRunner run(UserRepository userRepository, PasswordEncoder passwordEncoder) {
  		return args -> {
-			userRepository.save(User.builder().role(Role.USER).email("vince@gmail.com").password(passwordEncoder.encode("123456")).firstName("Vincent").lastName("Faye").createdAt(Instant.now()).build());
+			userRepository.save(User.builder().role(Role.USER).email("vincediegane@gmail.com").password(passwordEncoder.encode("123456")).firstName("Vincent").lastName("Faye").createdAt(Instant.now()).build());
 			userRepository.save(User.builder().role(Role.ADMIN).email("babskadam@gmail.com").password(passwordEncoder.encode("123456")).firstName("Babacar").lastName("Kadam").createdAt(Instant.now()).build());
 		};
 	}

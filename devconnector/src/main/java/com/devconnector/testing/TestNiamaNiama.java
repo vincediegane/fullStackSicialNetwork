@@ -1,12 +1,15 @@
 package com.devconnector.testing;
 
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.security.*;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class TestNiamaNiama {
-    public static void main(String...args) {
+    public static void main(String...args) throws UnsupportedEncodingException {
         Student st1 = Student.builder().firstName("Vince").lastName("Faye").age(31).build();
         Student st2 = Student.builder().firstName("Roxy").lastName("Diouf").age(31).build();
 
@@ -25,6 +28,5 @@ public class TestNiamaNiama {
             if(student!=null) System.out.println(student.toString());
             else System.out.println("null");
         });
-
     }
 }

@@ -1083,6 +1083,34 @@
         }
       }
     },
+    "/api/v1/github/gravatar/{email}": {
+      "get": {
+        "tags": ["github-user-repo-controller"],
+        "operationId": "getGravatarUrl",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/comments/{id}": {
       "get": {
         "tags": ["comment-controller"],

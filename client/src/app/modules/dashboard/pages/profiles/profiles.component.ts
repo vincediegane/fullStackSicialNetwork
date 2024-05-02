@@ -11,7 +11,7 @@ export class ProfilesComponent implements OnInit {
   loading: boolean = false;
   profiles: ProfileDto[] = [];
 
-  constructor(private profileService: ProfileControllerService, private skillService: SkillControllerService) { }
+  constructor(private profileService: ProfileControllerService) { }
 
   ngOnInit(): void {
     this.loadProfiles();
