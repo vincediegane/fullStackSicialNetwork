@@ -13,7 +13,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +37,16 @@ public class SkillServiceImpl implements SkillService {
     }
 
     @Override
+    public Skill getByCodeAndLabel(String code, String label) {
+        return skillRepository.findByCodeAndLabel(code, label).orElse(null);
+    }
+
+    @Override
     public SkillDTO addOrEditSkill(SkillDTO skillDTO, Authentication connectedUser) {
+        Skill skillByCL = getByCodeAndLabel(skillDTO.getCode(), skillDTO.getLabel());
+        if(skillByCL != null) {
+            throw new AppException("Skill already added", HttpStatus.BAD_REQUEST);
+        }
         User user = (User) connectedUser.getPrincipal();
         Skill skill = skillMapper.fromSkillDTO(skillDTO);
         if(skill.getUsers() == null) {
