@@ -1,13 +1,30 @@
 <div class="container">
-  <a routerLink="/dashboard/profiles" className="btn btn-light"
+  <a routerLink="/dashboard/profiles" class="btn btn-light"
     >Back To Profiles</a
   >
   <a routerLink="#" class="btn btn-dark" *ngIf="false">Edit Profile</a>
-  <div *ngIf="profile" className="profile-grid my-1">
-    <app-profile-top [profile]="profile"></app-profile-top>
-    <app-profile-about [profile]="profile"></app-profile-about>
-    <div className="profile-exp bg-white p-2">
-      <h2 className="text-primary">Experience</h2>
+
+  <div *ngIf="profile" class="profile-grid my-1">
+    <!-- TOP -->
+    <div class="profile-top bg-primary p-2">
+      <img class="round-img my-1" style="width: auto;" [src]="avatar" alt="avatar" />
+      <h1 *ngIf="user" class="large">{{ user.firstName }} {{ user.lastName }}</h1>
+      <p class="lead"><span>{{ profile.status }} at {{ profile.company }}</span></p>
+      <p><span>{{ profile.location }}</span></p>
+    </div>
+    <!-- ABOUT -->
+    <div class="profile-about bg-light p-2">
+      <h2 class="text-primary">{{ bioTitle }}</h2>
+      <p>{{ profile.bio }}</p>
+      <div class="line"></div>
+      <h2 class="text-primary">Skill Set</h2>
+      <div class="skills">
+          <div *ngFor="let skill of skills" class="p-1"><i class="fa fa-check"></i> {{ skill.label }}</div>
+      </div>
+  </div>
+    <!-- Exp -->
+    <div class="profile-exp bg-white p-2">
+      <h2 class="text-primary">Experience</h2>
       <div *ngFor="let experience of experiences">
         <app-profile-experience
           [experience]="experience"
@@ -15,13 +32,32 @@
       </div>
       <h4 *ngIf="!experiences.length">No experience credentials</h4>
     </div>
-    <div className="profile-edu bg-white p-2">
-      <h2 className="text-primary">Education</h2>
+    <!-- Edu -->
+    <div class="profile-edu bg-white p-2">
+      <h2 class="text-primary">Education</h2>
       <div *ngFor="let education of educations">
         <app-profile-education [education]="education"></app-profile-education>
       </div>
       <h4 *ngIf="!educations.length">No education credentials</h4>
     </div>
-    <app-profile-github *ngIf="profile.githubUsername?.length" [username]="username"></app-profile-github>
+    <!-- Github Repos -->
+    <div class="profile-github">
+      <h2 class="text-primary my-1"><i class="fab fa-github"></i> Github Repos</h2>
+      <div *ngFor="let repo of repos" class="repo bg-white p-1 my-1">
+        <div>
+          <h4>
+            <a href="#" target="_blank" rel="noopener noreferrer">{{repo.name}}</a>
+          </h4>
+          <p>{{ repo.description.length ? repo.description : "No desciption" }}</p>
+        </div>
+        <div>
+          <ul>
+            <li class="badge badge-primary">Stars: {{ repo.stargazers_count }}</li>
+            <li class="badge badge-dark">Watchers: {{ repo.watchers_count }}</li>
+            <li class="badge badge-light">Forks: {{ repo.forks_count }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
