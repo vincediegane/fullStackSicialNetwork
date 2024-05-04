@@ -32,6 +32,12 @@ public class ExperienceServiceImpl implements ExperienceService {
     }
 
     @Override
+    public List<ExperienceDTO> getProfileExperiences(Long profileId) {
+        List<Experience> experiences = experienceRepository.findProfileExperiences(profileId);
+        return experiences.stream().map(experienceMapper::fromExperience).toList();
+    }
+
+    @Override
     public ExperienceDTO findById(Long id) {
         Experience experience = experienceRepository.findById(id).orElseThrow(() -> new AppException("Experience not found", HttpStatus.NOT_FOUND));
         return experienceMapper.fromExperience(experience);

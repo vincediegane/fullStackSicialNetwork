@@ -1,1 +1,8 @@
-<p>profile-education works!</p>
+<div>
+    <h3>{{ education.school }}</h3>
+    <!-- <Moment format='YYYY/MM/DD'>{from}</Moment> - {' '}{!to ? (' Now') : (<Moment format='YYYY/MM/DD'>{to}</Moment> -->
+    <p>{{ education.fromDate | date:'YYYY/MM/dd' }} - {{ education.toDate | date:'YYYY/MM/dd' }}</p>
+    <p><strong>Degree: </strong>{{ education.degree }}</p>
+    <p><strong>Field Of Study: </strong>{{ education.fieldOfStudy }}</p>
+    <p><strong>Description: </strong></p>{{ education.description }}
+</div>

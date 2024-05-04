@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface ExperienceService {
     List<ExperienceDTO> findAll();
+    List<ExperienceDTO> getProfileExperiences(Long userId);
     ExperienceDTO findById(Long id);
     ExperienceDTO addExperience(ExperienceDTO experienceDTO, Authentication connectedUser);
     ExperienceDTO updateExperience(ExperienceDTO experienceDTO, Authentication connectedUser);

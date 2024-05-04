@@ -20,6 +20,11 @@ public class ExperienceController {
         return experienceService.findAll();
     }
 
+    @GetMapping("/profile/{profileId}")
+    public List<ExperienceDTO> getProfileExperiences(@PathVariable Long profileId) {
+        return  experienceService.getProfileExperiences(profileId);
+    }
+
     @GetMapping("/{id}")
     public ExperienceDTO getExperience(@PathVariable Long id) {
         return experienceService.findById(id);

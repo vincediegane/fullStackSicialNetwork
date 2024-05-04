@@ -14,14 +14,13 @@ export class ProfileItemComponent implements OnInit {
   user: UserDto = { id: 0, email: '', firstName: '', lastName: '' };
   skills: SkillDto[] = [];
   loading: boolean = false;
-  avatar: string | any;
-  userEmail: string = this.githubService.defaultAvatar;
+  avatar: string | any = this.githubService.defaultAvatarUrl;
+  userEmail: string = "";
   
   constructor(
     private skillService: SkillControllerService,
     private authService: AuthApiService,
     private githubService: GithubUserRepoControllerService,
-    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -59,18 +58,10 @@ export class ProfileItemComponent implements OnInit {
     this.githubService.getGravatarUrl({ email }).subscribe({
       next: (avatar: string) => {
         this.avatar = avatar;
-        console.log(avatar);
       },
       error: (err) => {
-        debugger
         console.log(err);
-        this.avatar = this.githubService.defaultAvatar;
       }
     });
   }
-
-  goToProfileDetails() {
-    this.router.navigateByUrl("/");
-  }
-
 }

@@ -18,6 +18,8 @@ import { getExperience } from '../fn/experience-controller/get-experience';
 import { GetExperience$Params } from '../fn/experience-controller/get-experience';
 import { getExperiences } from '../fn/experience-controller/get-experiences';
 import { GetExperiences$Params } from '../fn/experience-controller/get-experiences';
+import { getProfileExperiences } from '../fn/experience-controller/get-profile-experiences';
+import { GetProfileExperiences$Params } from '../fn/experience-controller/get-profile-experiences';
 import { updateExperience } from '../fn/experience-controller/update-experience';
 import { UpdateExperience$Params } from '../fn/experience-controller/update-experience';
 
@@ -149,6 +151,31 @@ export class ExperienceControllerService extends BaseService {
   addExperience(params: AddExperience$Params, context?: HttpContext): Observable<ExperienceDto> {
     return this.addExperience$Response(params, context).pipe(
       map((r: StrictHttpResponse<ExperienceDto>): ExperienceDto => r.body)
+    );
+  }
+
+  /** Path part for operation `getProfileExperiences()` */
+  static readonly GetProfileExperiencesPath = '/api/v1/experiences/profile/{profileId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getProfileExperiences()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getProfileExperiences$Response(params: GetProfileExperiences$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<ExperienceDto>>> {
+    return getProfileExperiences(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getProfileExperiences$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getProfileExperiences(params: GetProfileExperiences$Params, context?: HttpContext): Observable<Array<ExperienceDto>> {
+    return this.getProfileExperiences$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<ExperienceDto>>): Array<ExperienceDto> => r.body)
     );
   }
 

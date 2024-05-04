@@ -125,33 +125,6 @@
       }
     },
     "/api/v1/profiles/{id}": {
-      "get": {
-        "tags": ["profile-controller"],
-        "operationId": "getProfile",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProfileDTO"
-                }
-              }
-            }
-          }
-        }
-      },
       "put": {
         "tags": ["profile-controller"],
         "operationId": "updateProfile",
@@ -970,6 +943,35 @@
         }
       }
     },
+    "/api/v1/profiles/byId/{id}": {
+      "get": {
+        "tags": ["profile-controller"],
+        "operationId": "getProfile",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/likes/{likeId}": {
       "get": {
         "tags": ["like-controller"],
@@ -1104,6 +1106,70 @@
               "*/*": {
                 "schema": {
                   "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/experiences/profile/{profileId}": {
+      "get": {
+        "tags": ["experience-controller"],
+        "operationId": "getProfileExperiences",
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExperienceDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/educations/profile/{profileId}": {
+      "get": {
+        "tags": ["education-controller"],
+        "operationId": "getProfileEducations",
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EducationDTO"
+                  }
                 }
               }
             }

@@ -1,7 +1,6 @@
 <span *ngIf="loading">Loading...</span>
-<div *ngIf="!loading" class="profile bg-light">
+<div *ngIf="profile && !loading" class="profile bg-light">
   <img class="round-img" style="width: 200px;" [src]="avatar" alt="gravatar" />
-  <!-- <img class="round-img" style="width: 200px;" src="https://gravatar.com/avatar/f660ab912ec121d1b1e928a0bb4bc61b15f5ad44d5efdc4e1c92a25e99b8e44a" alt="gravatar" /> -->
   <div>
     <h2>{{ user.firstName }} {{ user.lastName }}</h2>
     <p>{{ profile.company }}</p>

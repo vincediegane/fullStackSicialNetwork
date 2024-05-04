@@ -3,28 +3,25 @@
     >Back To Profiles</a
   >
   <a routerLink="#" class="btn btn-dark" *ngIf="false">Edit Profile</a>
-  <div className="profile-grid my-1">
-    {{profile.bio}}
+  <div *ngIf="profile" className="profile-grid my-1">
     <app-profile-top [profile]="profile"></app-profile-top>
     <app-profile-about [profile]="profile"></app-profile-about>
     <div className="profile-exp bg-white p-2">
       <h2 className="text-primary">Experience</h2>
-      <div *ngFor="let experience of []">
+      <div *ngFor="let experience of experiences">
         <app-profile-experience
           [experience]="experience"
         ></app-profile-experience>
       </div>
-      <h4 *ngIf="false">No experience credentials</h4>
+      <h4 *ngIf="!experiences.length">No experience credentials</h4>
     </div>
     <div className="profile-edu bg-white p-2">
       <h2 className="text-primary">Education</h2>
-      <div *ngFor="let education of []">
+      <div *ngFor="let education of educations">
         <app-profile-education [education]="education"></app-profile-education>
       </div>
-      <h4 *ngIf="false">No education credentials</h4>
+      <h4 *ngIf="!educations.length">No education credentials</h4>
     </div>
-    <app-profile-github
-      *ngIf="profile.githubUsername?.length"
-    ></app-profile-github>
+    <app-profile-github *ngIf="profile.githubUsername?.length" [username]="username"></app-profile-github>
   </div>
 </div>

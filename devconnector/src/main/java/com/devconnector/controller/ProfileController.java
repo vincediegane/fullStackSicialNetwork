@@ -20,7 +20,7 @@ public class ProfileController {
         return profileService.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/byId/{id}")
     public ProfileDTO getProfile(@PathVariable Long id) {
         return profileService.getProfile(id);
     }

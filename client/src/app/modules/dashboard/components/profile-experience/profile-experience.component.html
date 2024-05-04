@@ -1,1 +1,8 @@
-<p>profile-experience works!</p>
+<div>
+    <h2 className='text-dark'>{{ experience.company }}</h2>
+    <p>from {{ experience.fromDate | date:'YYYY/MM/dd'}} - to {{ !experience.to ? ' Now' : experience.toDate | date:'YYYY/MM/dd' }}</p>
+    <p><strong>Position: </strong>{{ experience.title }}</p>
+    <p>
+        <strong>Description: </strong>{{ experience.description }}
+    </p>
+</div>

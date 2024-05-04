@@ -36,6 +36,12 @@ public class EducationServiceImpl implements EducationService {
     }
 
     @Override
+    public List<EducationDTO> getProfileEducations(Long profileId) {
+        List<Education> educations = educationRepository.findProfileEducations(profileId);
+        return educations.stream().map(educationMapper::fromEducation).toList();
+    }
+
+    @Override
     public EducationDTO findById(Long id) {
         Education education = educationRepository.findById(id).orElseThrow(() -> new AppException("Education not found", HttpStatus.NOT_FOUND));
         return educationMapper.fromEducation(education);

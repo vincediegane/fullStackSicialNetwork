@@ -21,6 +21,11 @@ public class EducationController {
         return educationService.findAll();
     }
 
+    @GetMapping("/profile/{profileId}")
+    public List<EducationDTO> getProfileEducations(@PathVariable Long profileId) {
+        return educationService.getProfileEducations(profileId);
+    }
+
     @GetMapping("/{id}")
     public EducationDTO getEducation(@PathVariable Long id) {
         return educationService.findById(id);

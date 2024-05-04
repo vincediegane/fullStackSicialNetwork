@@ -31,31 +31,6 @@ export class ProfileControllerService extends BaseService {
     super(config, http);
   }
 
-  /** Path part for operation `getProfile()` */
-  static readonly GetProfilePath = '/api/v1/profiles/{id}';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `getProfile()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  getProfile$Response(params: GetProfile$Params, context?: HttpContext): Observable<StrictHttpResponse<ProfileDto>> {
-    return getProfile(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `getProfile$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  getProfile(params: GetProfile$Params, context?: HttpContext): Observable<ProfileDto> {
-    return this.getProfile$Response(params, context).pipe(
-      map((r: StrictHttpResponse<ProfileDto>): ProfileDto => r.body)
-    );
-  }
-
   /** Path part for operation `updateProfile()` */
   static readonly UpdateProfilePath = '/api/v1/profiles/{id}';
 
@@ -202,6 +177,31 @@ export class ProfileControllerService extends BaseService {
    */
   getCurrentProfile(params?: GetCurrentProfile$Params, context?: HttpContext): Observable<ProfileDto> {
     return this.getCurrentProfile$Response(params, context).pipe(
+      map((r: StrictHttpResponse<ProfileDto>): ProfileDto => r.body)
+    );
+  }
+
+  /** Path part for operation `getProfile()` */
+  static readonly GetProfilePath = '/api/v1/profiles/byId/{id}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getProfile()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getProfile$Response(params: GetProfile$Params, context?: HttpContext): Observable<StrictHttpResponse<ProfileDto>> {
+    return getProfile(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getProfile$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getProfile(params: GetProfile$Params, context?: HttpContext): Observable<ProfileDto> {
+    return this.getProfile$Response(params, context).pipe(
       map((r: StrictHttpResponse<ProfileDto>): ProfileDto => r.body)
     );
   }

@@ -28,4 +28,4 @@ export function getProfile(http: HttpClient, rootUrl: string, params: GetProfile
   );
 }
 
-getProfile.PATH = '/api/v1/profiles/{id}';
+getProfile.PATH = '/api/v1/profiles/byId/{id}';

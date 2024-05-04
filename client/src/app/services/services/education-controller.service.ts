@@ -18,6 +18,8 @@ import { getEducation } from '../fn/education-controller/get-education';
 import { GetEducation$Params } from '../fn/education-controller/get-education';
 import { getEducations } from '../fn/education-controller/get-educations';
 import { GetEducations$Params } from '../fn/education-controller/get-educations';
+import { getProfileEducations } from '../fn/education-controller/get-profile-educations';
+import { GetProfileEducations$Params } from '../fn/education-controller/get-profile-educations';
 import { updateEducation } from '../fn/education-controller/update-education';
 import { UpdateEducation$Params } from '../fn/education-controller/update-education';
 
@@ -149,6 +151,31 @@ export class EducationControllerService extends BaseService {
   addEducation(params: AddEducation$Params, context?: HttpContext): Observable<EducationDto> {
     return this.addEducation$Response(params, context).pipe(
       map((r: StrictHttpResponse<EducationDto>): EducationDto => r.body)
+    );
+  }
+
+  /** Path part for operation `getProfileEducations()` */
+  static readonly GetProfileEducationsPath = '/api/v1/educations/profile/{profileId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getProfileEducations()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getProfileEducations$Response(params: GetProfileEducations$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<EducationDto>>> {
+    return getProfileEducations(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getProfileEducations$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getProfileEducations(params: GetProfileEducations$Params, context?: HttpContext): Observable<Array<EducationDto>> {
+    return this.getProfileEducations$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<EducationDto>>): Array<EducationDto> => r.body)
     );
   }
 
