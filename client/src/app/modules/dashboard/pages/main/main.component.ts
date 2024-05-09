@@ -12,4 +12,8 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  deleteAccount() {
+    console.log('deleting...'); 
+  }
+
 }

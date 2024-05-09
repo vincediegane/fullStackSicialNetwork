@@ -13,6 +13,8 @@ import { findAll } from '../fn/like-controller/find-all';
 import { FindAll$Params } from '../fn/like-controller/find-all';
 import { findById } from '../fn/like-controller/find-by-id';
 import { FindById$Params } from '../fn/like-controller/find-by-id';
+import { findLikeByOnePost } from '../fn/like-controller/find-like-by-one-post';
+import { FindLikeByOnePost$Params } from '../fn/like-controller/find-like-by-one-post';
 import { findLikeByPost } from '../fn/like-controller/find-like-by-post';
 import { FindLikeByPost$Params } from '../fn/like-controller/find-like-by-post';
 import { LikeDto } from '../models/like-dto';
@@ -32,7 +34,10 @@ export class LikeControllerService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findById$Response(params: FindById$Params, context?: HttpContext): Observable<StrictHttpResponse<LikeDto>> {
+  findById$Response(
+    params: FindById$Params,
+    context?: HttpContext
+  ): Observable<StrictHttpResponse<LikeDto>> {
     return findById(this.http, this.rootUrl, params, context);
   }
 
@@ -42,7 +47,10 @@ export class LikeControllerService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findById(params: FindById$Params, context?: HttpContext): Observable<LikeDto> {
+  findById(
+    params: FindById$Params,
+    context?: HttpContext
+  ): Observable<LikeDto> {
     return this.findById$Response(params, context).pipe(
       map((r: StrictHttpResponse<LikeDto>): LikeDto => r.body)
     );
@@ -57,7 +65,10 @@ export class LikeControllerService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findLikeByPost$Response(params: FindLikeByPost$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<LikeDto>>> {
+  findLikeByPost$Response(
+    params: FindLikeByPost$Params,
+    context?: HttpContext
+  ): Observable<StrictHttpResponse<Array<LikeDto>>> {
     return findLikeByPost(this.http, this.rootUrl, params, context);
   }
 
@@ -67,9 +78,43 @@ export class LikeControllerService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findLikeByPost(params: FindLikeByPost$Params, context?: HttpContext): Observable<Array<LikeDto>> {
+  findLikeByPost(
+    params: FindLikeByPost$Params,
+    context?: HttpContext
+  ): Observable<Array<LikeDto>> {
     return this.findLikeByPost$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<LikeDto>>): Array<LikeDto> => r.body)
+    );
+  }
+
+  /** Path part for operation `findLikeByOnePost()` */
+  static readonly FindLikeByOnePostPath = '/api/v1/likes/post/{postId}/count';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `findLikeByOnePost()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findLikeByOnePost$Response(
+    params: FindLikeByOnePost$Params,
+    context?: HttpContext
+  ): Observable<StrictHttpResponse<{}>> {
+    return findLikeByOnePost(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `findLikeByOnePost$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findLikeByOnePost(
+    params: FindLikeByOnePost$Params,
+    context?: HttpContext
+  ): Observable<{}> {
+    return this.findLikeByOnePost$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{}>): {} => r.body)
     );
   }
 
@@ -82,7 +127,10 @@ export class LikeControllerService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findAll$Response(params?: FindAll$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<LikeDto>>> {
+  findAll$Response(
+    params?: FindAll$Params,
+    context?: HttpContext
+  ): Observable<StrictHttpResponse<Array<LikeDto>>> {
     return findAll(this.http, this.rootUrl, params, context);
   }
 
@@ -92,10 +140,12 @@ export class LikeControllerService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findAll(params?: FindAll$Params, context?: HttpContext): Observable<Array<LikeDto>> {
+  findAll(
+    params?: FindAll$Params,
+    context?: HttpContext
+  ): Observable<Array<LikeDto>> {
     return this.findAll$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<LikeDto>>): Array<LikeDto> => r.body)
     );
   }
-
 }

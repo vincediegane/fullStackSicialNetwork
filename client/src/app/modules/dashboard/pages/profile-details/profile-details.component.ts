@@ -10,7 +10,7 @@ import { AuthApiService, EducationControllerService, ExperienceControllerService
 })
 export class ProfileDetailsComponent implements OnInit {
   user!: UserDto;
-  defaultAvatarUrl: string = "https://gravatar.com/avatar/f660ab912ec121d1b1e928a0bb4bc61b15f5ad44d5efdc4e1c92a25e99b8e44a";
+  defaultAvatarUrl: string = "";
   profile!: ProfileDto;
   currentProfileId!: number;
   avatar: string = '';
@@ -112,7 +112,10 @@ export class ProfileDetailsComponent implements OnInit {
   getAvatar(email: string) {
     this.githubService.getGravatarUrl({ email }).subscribe({
       next: (avatar: string) => {
-        this.avatar = avatar;
+        if(avatar.length)
+          this.avatar = avatar;
+        else
+          this.avatar = this.githubService.defaultAvatarUrl;
       },
       error: (err) => {
         console.log(err);

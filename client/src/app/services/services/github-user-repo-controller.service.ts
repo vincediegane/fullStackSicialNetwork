@@ -34,8 +34,10 @@ export class GithubUserRepoControllerService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getGithubRepos$Response(params: GetGithubRepos$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<{
-}>>> {
+  getGithubRepos$Response(
+    params: GetGithubRepos$Params,
+    context?: HttpContext
+  ): Observable<StrictHttpResponse<Array<{}>>> {
     return getGithubRepos(this.http, this.rootUrl, params, context);
   }
 
@@ -45,12 +47,12 @@ export class GithubUserRepoControllerService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getGithubRepos(params: GetGithubRepos$Params, context?: HttpContext): Observable<Array<{
-}>> {
+  getGithubRepos(
+    params: GetGithubRepos$Params,
+    context?: HttpContext
+  ): Observable<Array<{}>> {
     return this.getGithubRepos$Response(params, context).pipe(
-      map((r: StrictHttpResponse<Array<{
-}>>): Array<{
-}> => r.body)
+      map((r: StrictHttpResponse<Array<{}>>): Array<{}> => r.body)
     );
   }
 
@@ -63,7 +65,10 @@ export class GithubUserRepoControllerService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getGravatarUrl$Response(params: GetGravatarUrl$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
+  getGravatarUrl$Response(
+    params: GetGravatarUrl$Params,
+    context?: HttpContext
+  ): Observable<StrictHttpResponse<string>> {
     return getGravatarUrl(this.http, this.rootUrl, params, context);
   }
 
@@ -73,10 +78,12 @@ export class GithubUserRepoControllerService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getGravatarUrl(params: GetGravatarUrl$Params, context?: HttpContext): Observable<string> {
+  getGravatarUrl(
+    params: GetGravatarUrl$Params,
+    context?: HttpContext
+  ): Observable<string> {
     return this.getGravatarUrl$Response(params, context).pipe(
       map((r: StrictHttpResponse<string>): string => r.body)
     );
   }
-
 }

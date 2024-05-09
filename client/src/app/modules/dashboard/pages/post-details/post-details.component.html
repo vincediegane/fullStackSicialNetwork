@@ -1,0 +1,8 @@
+<div *ngIf="!loading" class="container">
+  <a routerLink="/dashboard/posts" class="btn btn-light">Back To Posts</a>
+  <app-post-item [post]="currentPost"></app-post-item>
+  <app-comment-form></app-comment-form>
+  <div class="comments">
+    <app-comment-item></app-comment-item>
+  </div>
+</div>

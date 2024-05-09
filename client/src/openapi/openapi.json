@@ -192,7 +192,7 @@
     },
     "/api/v1/posts/{id}": {
       "get": {
-        "tags": ["post-rest-controller"],
+        "tags": ["post-controller"],
         "operationId": "getPostById",
         "parameters": [
           {
@@ -219,7 +219,7 @@
         }
       },
       "put": {
-        "tags": ["post-rest-controller"],
+        "tags": ["post-controller"],
         "operationId": "updatePost",
         "parameters": [
           {
@@ -519,7 +519,7 @@
     },
     "/api/v1/posts/unlike/{likeId}": {
       "post": {
-        "tags": ["post-rest-controller"],
+        "tags": ["post-controller"],
         "operationId": "unlikePost",
         "parameters": [
           {
@@ -548,7 +548,7 @@
     },
     "/api/v1/posts/like/{postId}": {
       "post": {
-        "tags": ["post-rest-controller"],
+        "tags": ["post-controller"],
         "operationId": "likePost",
         "parameters": [
           {
@@ -577,7 +577,7 @@
     },
     "/api/v1/posts/": {
       "get": {
-        "tags": ["post-rest-controller"],
+        "tags": ["post-controller"],
         "operationId": "getAllPost",
         "responses": {
           "200": {
@@ -596,7 +596,7 @@
         }
       },
       "post": {
-        "tags": ["post-rest-controller"],
+        "tags": ["post-controller"],
         "operationId": "addPost",
         "requestBody": {
           "content": {
@@ -1026,6 +1026,35 @@
                   "items": {
                     "$ref": "#/components/schemas/LikeDTO"
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/likes/post/{postId}/count": {
+      "get": {
+        "tags": ["like-controller"],
+        "operationId": "findLikeByOnePost",
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
                 }
               }
             }

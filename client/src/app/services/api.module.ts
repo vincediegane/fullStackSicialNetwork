@@ -6,7 +6,7 @@ import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { SkillControllerService } from './services/skill-controller.service';
 import { ProfileControllerService } from './services/profile-controller.service';
-import { PostRestControllerService } from './services/post-rest-controller.service';
+import { PostControllerService } from './services/post-controller.service';
 import { ExperienceControllerService } from './services/experience-controller.service';
 import { EducationControllerService } from './services/education-controller.service';
 import { CommentControllerService } from './services/comment-controller.service';
@@ -24,7 +24,7 @@ import { GithubUserRepoControllerService } from './services/github-user-repo-con
   providers: [
     SkillControllerService,
     ProfileControllerService,
-    PostRestControllerService,
+    PostControllerService,
     ExperienceControllerService,
     EducationControllerService,
     CommentControllerService,

@@ -1,6 +1,6 @@
 export { SkillControllerService } from './services/skill-controller.service';
 export { ProfileControllerService } from './services/profile-controller.service';
-export { PostRestControllerService } from './services/post-rest-controller.service';
+export { PostControllerService } from './services/post-controller.service';
 export { ExperienceControllerService } from './services/experience-controller.service';
 export { EducationControllerService } from './services/education-controller.service';
 export { CommentControllerService } from './services/comment-controller.service';

@@ -1,0 +1,21 @@
+<div class="post-form">
+  <div class="bg-primary p">
+    <h3>Say Something...</h3>
+  </div>
+  <form [formGroup]="postForm"  class="form my-1">
+    <div class="form-group">
+      <input placeholder="Title" type="text" name="title" id="title" formControlName="title"/>
+    </div>
+    <div class="form-group">
+        <textarea
+          name="text"
+          cols="30"
+          rows="5"
+          placeholder="Create a post"
+          formControlName="body"
+          required
+        ></textarea>
+        <input type="submit" class="btn btn-dark my-1" value="Submit" (click)="addPost()" />
+    </div>
+  </form>
+</div>

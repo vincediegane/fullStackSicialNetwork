@@ -52,7 +52,7 @@ public class PostServiceImpl implements PostService {
     public void like(Long postId, Authentication connectedUser) {
         User user = (User) connectedUser.getPrincipal();
 
-        Post post = postMapper.fromPostDTO(findById(postId));
+        Post post = postRepository.findById(postId).orElse(null);
 
         if(post == null) {
             throw new AppException("Post not found", HttpStatus.NOT_FOUND);
@@ -69,7 +69,25 @@ public class PostServiceImpl implements PostService {
             .post(post)
             .user(user)
             .build();
-        Like savedLike = likeRepository.save(like);
+        likeRepository.save(like);
+    }
+
+    @Override
+    public void unlike(Long postId, Authentication connectedUser) {
+        User user = (User) connectedUser.getPrincipal();
+
+        Post post = postRepository.findById(postId).orElse(null);
+
+        if(post == null) {
+            throw new AppException("Post not found", HttpStatus.NOT_FOUND);
+        }
+        if(post.getLikes() == null) {
+            post.setLikes(new ArrayList<>());
+        }
+        if(post.getLikes().stream().anyMatch(like -> Objects.equals(like.getUser().getId(), user.getId()))) {
+            throw new AppException("There is nothing to unlike", HttpStatus.BAD_REQUEST);
+        }
+        likeRepository.deleteById(post.getLikes().stream().map(Like::getId).count());
     }
 
     @Override

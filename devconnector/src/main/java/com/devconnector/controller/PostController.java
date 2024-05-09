@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/v1/posts")
-public class PostRestController {
+public class PostController {
     private final PostService postService;
     private final LikeService likeService;
 
@@ -44,9 +44,15 @@ public class PostRestController {
         return ResponseEntity.ok("Liked");
     }
 
-    @PostMapping("/unlike/{likeId}")
-    public ResponseEntity<String> unlikePost(@PathVariable Long likeId) {
-        likeService.unlike(likeId);
-        return ResponseEntity.ok("Unliked");
+    @PutMapping("/unlike/{postId}")
+    public ResponseEntity<String> unlikePost(@PathVariable Long postId, Authentication connectedUser) {
+        postService.unlike(postId, connectedUser);
+        return ResponseEntity.ok("UnLiked");
     }
+
+//    @PostMapping("/unlike/{likeId}")
+//    public ResponseEntity<String> unlikePost(@PathVariable Long likeId) {
+//        likeService.unlike(likeId);
+//        return ResponseEntity.ok("Unliked");
+//    }
 }

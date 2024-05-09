@@ -1,0 +1,13 @@
+<div class="container">
+    <h1 className='large text-primary'>Posts</h1>
+    <p className='lead'>
+      <i className='fas fa-user'></i> Welcome to the community
+    </p>
+    <app-post-form (savePost)="addPost($event)"></app-post-form>
+    <div *ngIf="!loading" class="posts">
+        <div *ngFor="let post of posts">
+            <app-post-item [post]="post"></app-post-item>
+        </div>
+    </div>
+    <div *ngIf="loading">No post found</div>
+</div>

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthResponseDto } from 'src/app/services/models';
 import { AuthApiService } from 'src/app/services/services';
-import { TokenService } from 'src/app/services/services/token.service';
+import { TokenService } from 'src/app/services/token/token.service';
 
 @Component({
   selector: 'app-login',
