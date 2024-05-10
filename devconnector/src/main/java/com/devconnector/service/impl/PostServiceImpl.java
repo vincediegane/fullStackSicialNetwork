@@ -18,6 +18,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 @Service
 @AllArgsConstructor
@@ -84,10 +85,11 @@ public class PostServiceImpl implements PostService {
         if(post.getLikes() == null) {
             post.setLikes(new ArrayList<>());
         }
-        if(post.getLikes().stream().anyMatch(like -> Objects.equals(like.getUser().getId(), user.getId()))) {
+        if(!post.getLikes().stream().anyMatch(like -> Objects.equals(like.getUser().getId(), user.getId()))) {
             throw new AppException("There is nothing to unlike", HttpStatus.BAD_REQUEST);
         }
-        likeRepository.deleteById(post.getLikes().stream().map(Like::getId).count());
+        Long likeId = post.getLikes().stream().filter(like -> like.getUser().getId().equals(user.getId())).map(like -> like.getId()).count();
+        likeRepository.deleteById(likeId);
     }
 
     @Override
