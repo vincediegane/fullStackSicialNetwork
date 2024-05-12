@@ -50,9 +50,9 @@ public class PostController {
         return ResponseEntity.ok("UnLiked");
     }
 
-//    @PostMapping("/unlike/{likeId}")
-//    public ResponseEntity<String> unlikePost(@PathVariable Long likeId) {
-//        likeService.unlike(likeId);
-//        return ResponseEntity.ok("Unliked");
-//    }
+    @PostMapping("/likeOrUnlike/{postId}")
+    public ResponseEntity<String> likeOrUnlikePost(@PathVariable Long postId, Authentication connectedUser) {
+        postService.likeORunlike(postId, connectedUser);
+        return ResponseEntity.ok("Unliked");
+    }
 }

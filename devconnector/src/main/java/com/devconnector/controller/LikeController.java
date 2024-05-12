@@ -34,6 +34,12 @@ public class LikeController {
 
     @GetMapping("/post/{postId}/count")
     public ResponseEntity<?> findLikeByOnePost(@PathVariable Long postId) {
-        return ResponseEntity.ok(likeService.findLikesByOnePost(postId));
+        long count = likeService.findLikesByOnePost(postId).stream().count();
+        return ResponseEntity.ok(count);
+    }
+
+    @GetMapping("/byUserAndPost/{postId}")
+    public LikeDTO findLikeByPostAndUser(@PathVariable long postId) {
+        return likeService.findLikeByUserByPost(postId);
     }
 }

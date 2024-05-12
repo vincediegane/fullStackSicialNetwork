@@ -20,7 +20,6 @@ import java.util.List;
 public class LikeServiceImpl implements LikeService {
     private final LikeRepository likeRepository;
     private final LikeMapper likeMapper;
-    private final UserMapper userMapper;
 
     @Override
     public List<LikeDTO> findAll() {
@@ -46,7 +45,13 @@ public class LikeServiceImpl implements LikeService {
     }
 
     @Override
-    public int findLikesByOnePost(Long postId) {
-        return likeRepository.findLikesByPost(postId);
+    public List<LikeDTO> findLikesByOnePost(Long postId) {
+        List<Like> likes = likeRepository.findLikesByPost(postId);
+        return likes.stream().map(like -> likeMapper.fromLike(like)).toList();
+    }
+
+    @Override
+    public LikeDTO findLikeByUserByPost(Long postId) {
+        return likeMapper.fromLike(likeRepository.findLikeByUserByPost(postId));
     }
 }

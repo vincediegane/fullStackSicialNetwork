@@ -23,4 +23,12 @@ public class LikeMapper {
             .likedAt(like.getLikedAt())
             .build();
     }
+
+    public LikeDTO fromLike(Like like, UserDTO userDTO) {
+        return LikeDTO.builder()
+            .id(like.getId())
+            .likedAt(like.getLikedAt())
+            .userDTO(userDTO)
+            .build();
+    }
 }

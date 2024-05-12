@@ -1,9 +1,13 @@
 package com.devconnector.service.impl;
 
+import com.devconnector.dto.LikeDTO;
 import com.devconnector.dto.PostDTO;
 import com.devconnector.dto.PostRequestDTO;
+import com.devconnector.dto.UserDTO;
 import com.devconnector.exception.AppException;
+import com.devconnector.mapper.LikeMapper;
 import com.devconnector.mapper.PostMapper;
+import com.devconnector.mapper.UserMapper;
 import com.devconnector.model.Like;
 import com.devconnector.model.Post;
 import com.devconnector.model.User;
@@ -18,6 +22,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
@@ -25,8 +30,10 @@ import java.util.stream.Stream;
 public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
-    private PostMapper postMapper;
-    private LikeRepository likeRepository;
+    private final PostMapper postMapper;
+    private final LikeRepository likeRepository;
+    private final LikeMapper likeMapper;
+    private final UserMapper userMapper;
 
     @Override
     public PostDTO findById(Long id) {
@@ -90,6 +97,41 @@ public class PostServiceImpl implements PostService {
         }
         Long likeId = post.getLikes().stream().filter(like -> like.getUser().getId().equals(user.getId())).map(like -> like.getId()).count();
         likeRepository.deleteById(likeId);
+    }
+
+    @Override
+    public void likeORunlike(Long postId, Authentication connectedUser) {
+        User user = (User) connectedUser.getPrincipal();
+
+        Post post = postRepository.findById(postId).orElse(null);
+        if(post == null) throw new AppException("Post not found.", HttpStatus.NOT_FOUND);
+
+        if(post.getLikes().isEmpty()) {
+            Like like = Like.builder()
+                .likedAt(Instant.now())
+                .post(post)
+                .user(user)
+                .build();
+            likeRepository.save(like);
+        } else {
+            UserDTO userDTO = userMapper.fromUser(user);
+            List<Like> likes = likeRepository.findLikesByPost(postId);
+            List<LikeDTO> likeDTOS = likes.stream().map(like -> likeMapper.fromLike(like, userDTO)).toList();
+
+            if(likeDTOS.stream().noneMatch(likeDTO -> Objects.equals(likeDTO.getUserDTO().getId(), user.getId()))) {
+                Like like = Like.builder()
+                    .likedAt(Instant.now())
+                    .post(post)
+                    .user(user)
+                    .build();
+                likeRepository.save(like);
+            } else {
+                List<LikeDTO> filteredLikes = likeDTOS.stream()
+                    .filter(like -> Objects.equals(like.getUserDTO().getId(), user.getId()))
+                    .collect(Collectors.toList());
+                likeRepository.deleteById(filteredLikes.get(0).getId());
+            }
+        }
     }
 
     @Override
