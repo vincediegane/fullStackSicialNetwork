@@ -256,6 +256,35 @@
         }
       }
     },
+    "/api/v1/posts/unlike/{postId}": {
+      "put": {
+        "tags": ["post-controller"],
+        "operationId": "unlikePost",
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/experiences/{id}": {
       "get": {
         "tags": ["experience-controller"],
@@ -517,13 +546,13 @@
         }
       }
     },
-    "/api/v1/posts/unlike/{likeId}": {
+    "/api/v1/posts/likeOrUnlike/{postId}": {
       "post": {
         "tags": ["post-controller"],
-        "operationId": "unlikePost",
+        "operationId": "likeOrUnlikePost",
         "parameters": [
           {
-            "name": "likeId",
+            "name": "postId",
             "in": "path",
             "required": true,
             "schema": {
@@ -1055,6 +1084,35 @@
               "*/*": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/likes/byUserAndPost/{postId}": {
+      "get": {
+        "tags": ["like-controller"],
+        "operationId": "findLikeByPostAndUser",
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/LikeDTO"
                 }
               }
             }

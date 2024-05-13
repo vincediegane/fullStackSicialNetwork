@@ -3,7 +3,6 @@ package com.devconnector.service.impl;
 import com.devconnector.dto.LikeDTO;
 import com.devconnector.exception.AppException;
 import com.devconnector.mapper.LikeMapper;
-import com.devconnector.mapper.UserMapper;
 import com.devconnector.model.Like;
 import com.devconnector.repository.LikeRepository;
 import com.devconnector.service.LikeService;
@@ -47,7 +46,7 @@ public class LikeServiceImpl implements LikeService {
     @Override
     public List<LikeDTO> findLikesByOnePost(Long postId) {
         List<Like> likes = likeRepository.findLikesByPost(postId);
-        return likes.stream().map(like -> likeMapper.fromLike(like)).toList();
+        return likes.stream().map(likeMapper::fromLike).toList();
     }
 
     @Override

@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { LikeDto, PostDto, UserDto } from 'src/app/services/models';
+import { PostDto } from 'src/app/services/models';
 import { GithubUserRepoControllerService, LikeControllerService, PostControllerService } from 'src/app/services/services';
 
 @Component({
@@ -19,8 +18,7 @@ export class PostItemComponent implements OnInit {
   constructor(
     private githubService: GithubUserRepoControllerService,
     private postService: PostControllerService,
-    private likeService: LikeControllerService,
-    private router: Router
+    private likeService: LikeControllerService
   ) {
   }
 
@@ -53,7 +51,7 @@ export class PostItemComponent implements OnInit {
   }
 
   likePost(postId: any) {
-    this.postService.likePost({ postId }).subscribe({
+    this.postService.likeOrUnlikePost({ postId }).subscribe({
       next: () => {
         this.getPostLikesCount(postId);
       },
