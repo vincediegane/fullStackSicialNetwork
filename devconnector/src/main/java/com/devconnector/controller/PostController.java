@@ -37,22 +37,4 @@ public class PostController {
         postRequestDTO.setId(id);
         return postService.updatePost(postRequestDTO, connectedUser);
     }
-
-    @PostMapping("/like/{postId}")
-    public ResponseEntity<String> likePost(@PathVariable Long postId, Authentication connectedUser) {
-        postService.like(postId, connectedUser);
-        return ResponseEntity.ok("Liked");
-    }
-
-    @PutMapping("/unlike/{postId}")
-    public ResponseEntity<String> unlikePost(@PathVariable Long postId, Authentication connectedUser) {
-        postService.unlike(postId, connectedUser);
-        return ResponseEntity.ok("UnLiked");
-    }
-
-    @PostMapping("/likeOrUnlike/{postId}")
-    public ResponseEntity<String> likeOrUnlikePost(@PathVariable Long postId, Authentication connectedUser) {
-        postService.likeORunlike(postId, connectedUser);
-        return ResponseEntity.ok("Unliked");
-    }
 }

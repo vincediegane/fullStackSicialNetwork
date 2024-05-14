@@ -1,13 +1,14 @@
 package com.devconnector.service;
 
 import com.devconnector.dto.LikeDTO;
+import org.springframework.security.core.Authentication;
+
 import java.util.List;
 
 public interface LikeService {
     List<LikeDTO> findAll();
     List<LikeDTO> findLikesByPost(Long postId);
     LikeDTO findById(Long likeId);
-    void unlike(Long likeId);
     List<LikeDTO> findLikesByOnePost(Long postId);
-    LikeDTO findLikeByUserByPost(Long postID);
+    String likeOrUnlikePost(Long postId, Authentication connectedUser);
 }
