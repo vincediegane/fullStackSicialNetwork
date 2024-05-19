@@ -46,7 +46,7 @@ public class LikeServiceImpl implements LikeService {
 
     @Override
     public List<LikeDTO> findLikesByOnePost(Long postId) {
-        List<Like> likes = likeRepository.findLikesByPost(postId);
+        List<Like> likes = likeRepository.findByPostId(postId);
         return likes.stream().map(likeMapper::fromLike).toList();
     }
 
