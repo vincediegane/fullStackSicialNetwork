@@ -22,9 +22,9 @@ public class PostController {
         return postService.getAllPosts();
     }
 
-    @GetMapping("/{id}")
-    public PostDTO getPostById(@PathVariable Long id) {
-        return postService.findById(id);
+    @GetMapping("/{postId}")
+    public PostDTO getPostById(@PathVariable Long postId) {
+        return postService.findById(postId);
     }
 
     @PostMapping("/")
@@ -32,9 +32,15 @@ public class PostController {
         return postService.addPost(postRequestDTO, connectedUser);
     }
 
-    @PutMapping("/{id}")
-    public PostDTO updatePost(@PathVariable Long id, @RequestBody PostRequestDTO postRequestDTO, Authentication connectedUser) {
-        postRequestDTO.setId(id);
+    @PutMapping("/{postId}")
+    public PostDTO updatePost(@PathVariable Long postId, @RequestBody PostRequestDTO postRequestDTO, Authentication connectedUser) {
+        postRequestDTO.setId(postId);
         return postService.updatePost(postRequestDTO, connectedUser);
+    }
+
+    @DeleteMapping("/{postId}")
+    public ResponseEntity<String> deletePost(@PathVariable Long postId) {
+        postService.deletePostById(postId);
+        return ResponseEntity.ok("deleted");
     }
 }

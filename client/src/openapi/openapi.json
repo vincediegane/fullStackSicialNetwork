@@ -256,35 +256,6 @@
         }
       }
     },
-    "/api/v1/posts/unlike/{postId}": {
-      "put": {
-        "tags": ["post-controller"],
-        "operationId": "unlikePost",
-        "parameters": [
-          {
-            "name": "postId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/v1/experiences/{id}": {
       "get": {
         "tags": ["experience-controller"],
@@ -546,64 +517,6 @@
         }
       }
     },
-    "/api/v1/posts/likeOrUnlike/{postId}": {
-      "post": {
-        "tags": ["post-controller"],
-        "operationId": "likeOrUnlikePost",
-        "parameters": [
-          {
-            "name": "postId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/posts/like/{postId}": {
-      "post": {
-        "tags": ["post-controller"],
-        "operationId": "likePost",
-        "parameters": [
-          {
-            "name": "postId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/v1/posts/": {
       "get": {
         "tags": ["post-controller"],
@@ -644,6 +557,35 @@
               "*/*": {
                 "schema": {
                   "$ref": "#/components/schemas/PostDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/likes/{postId}/like": {
+      "post": {
+        "tags": ["like-controller"],
+        "operationId": "likeOrUnlikePost",
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
                 }
               }
             }
@@ -1084,35 +1026,6 @@
               "*/*": {
                 "schema": {
                   "type": "object"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/likes/byUserAndPost/{postId}": {
-      "get": {
-        "tags": ["like-controller"],
-        "operationId": "findLikeByPostAndUser",
-        "parameters": [
-          {
-            "name": "postId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/LikeDTO"
                 }
               }
             }

@@ -15,13 +15,7 @@ import { getAllPost } from '../fn/post-controller/get-all-post';
 import { GetAllPost$Params } from '../fn/post-controller/get-all-post';
 import { getPostById } from '../fn/post-controller/get-post-by-id';
 import { GetPostById$Params } from '../fn/post-controller/get-post-by-id';
-import { likeOrUnlikePost } from '../fn/post-controller/like-or-unlike-post';
-import { LikeOrUnlikePost$Params } from '../fn/post-controller/like-or-unlike-post';
-import { likePost } from '../fn/post-controller/like-post';
-import { LikePost$Params } from '../fn/post-controller/like-post';
 import { PostDto } from '../models/post-dto';
-import { unlikePost } from '../fn/post-controller/unlike-post';
-import { UnlikePost$Params } from '../fn/post-controller/unlike-post';
 import { updatePost } from '../fn/post-controller/update-post';
 import { UpdatePost$Params } from '../fn/post-controller/update-post';
 
@@ -78,81 +72,6 @@ export class PostControllerService extends BaseService {
   updatePost(params: UpdatePost$Params, context?: HttpContext): Observable<PostDto> {
     return this.updatePost$Response(params, context).pipe(
       map((r: StrictHttpResponse<PostDto>): PostDto => r.body)
-    );
-  }
-
-  /** Path part for operation `unlikePost()` */
-  static readonly UnlikePostPath = '/api/v1/posts/unlike/{postId}';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `unlikePost()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  unlikePost$Response(params: UnlikePost$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
-    return unlikePost(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `unlikePost$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  unlikePost(params: UnlikePost$Params, context?: HttpContext): Observable<string> {
-    return this.unlikePost$Response(params, context).pipe(
-      map((r: StrictHttpResponse<string>): string => r.body)
-    );
-  }
-
-  /** Path part for operation `likeOrUnlikePost()` */
-  static readonly LikeOrUnlikePostPath = '/api/v1/posts/likeOrUnlike/{postId}';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `likeOrUnlikePost()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  likeOrUnlikePost$Response(params: LikeOrUnlikePost$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
-    return likeOrUnlikePost(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `likeOrUnlikePost$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  likeOrUnlikePost(params: LikeOrUnlikePost$Params, context?: HttpContext): Observable<string> {
-    return this.likeOrUnlikePost$Response(params, context).pipe(
-      map((r: StrictHttpResponse<string>): string => r.body)
-    );
-  }
-
-  /** Path part for operation `likePost()` */
-  static readonly LikePostPath = '/api/v1/posts/like/{postId}';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `likePost()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  likePost$Response(params: LikePost$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
-    return likePost(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `likePost$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  likePost(params: LikePost$Params, context?: HttpContext): Observable<string> {
-    return this.likePost$Response(params, context).pipe(
-      map((r: StrictHttpResponse<string>): string => r.body)
     );
   }
 

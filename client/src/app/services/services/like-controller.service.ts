@@ -17,14 +17,45 @@ import { findLikeByOnePost } from '../fn/like-controller/find-like-by-one-post';
 import { FindLikeByOnePost$Params } from '../fn/like-controller/find-like-by-one-post';
 import { findLikeByPost } from '../fn/like-controller/find-like-by-post';
 import { FindLikeByPost$Params } from '../fn/like-controller/find-like-by-post';
-import { findLikeByPostAndUser } from '../fn/like-controller/find-like-by-post-and-user';
-import { FindLikeByPostAndUser$Params } from '../fn/like-controller/find-like-by-post-and-user';
 import { LikeDto } from '../models/like-dto';
+import { likeOrUnlikePost } from '../fn/like-controller/like-or-unlike-post';
+import { LikeOrUnlikePost$Params } from '../fn/like-controller/like-or-unlike-post';
 
 @Injectable({ providedIn: 'root' })
 export class LikeControllerService extends BaseService {
   constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
+  }
+
+  /** Path part for operation `likeOrUnlikePost()` */
+  static readonly LikeOrUnlikePostPath = '/api/v1/likes/{postId}/like';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `likeOrUnlikePost()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  likeOrUnlikePost$Response(
+    params: LikeOrUnlikePost$Params,
+    context?: HttpContext
+  ): Observable<StrictHttpResponse<string>> {
+    return likeOrUnlikePost(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `likeOrUnlikePost$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  likeOrUnlikePost(
+    params: LikeOrUnlikePost$Params,
+    context?: HttpContext
+  ): Observable<string> {
+    return this.likeOrUnlikePost$Response(params, context).pipe(
+      map((r: StrictHttpResponse<string>): string => r.body)
+    );
   }
 
   /** Path part for operation `findById()` */
@@ -117,38 +148,6 @@ export class LikeControllerService extends BaseService {
   ): Observable<{}> {
     return this.findLikeByOnePost$Response(params, context).pipe(
       map((r: StrictHttpResponse<{}>): {} => r.body)
-    );
-  }
-
-  /** Path part for operation `findLikeByPostAndUser()` */
-  static readonly FindLikeByPostAndUserPath =
-    '/api/v1/likes/byUserAndPost/{postId}';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findLikeByPostAndUser()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  findLikeByPostAndUser$Response(
-    params: FindLikeByPostAndUser$Params,
-    context?: HttpContext
-  ): Observable<StrictHttpResponse<LikeDto>> {
-    return findLikeByPostAndUser(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findLikeByPostAndUser$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  findLikeByPostAndUser(
-    params: FindLikeByPostAndUser$Params,
-    context?: HttpContext
-  ): Observable<LikeDto> {
-    return this.findLikeByPostAndUser$Response(params, context).pipe(
-      map((r: StrictHttpResponse<LikeDto>): LikeDto => r.body)
     );
   }
 

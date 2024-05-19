@@ -10,15 +10,15 @@
         {{ post.body }}
       </p>
       <p class="post-date">Posted on {{ post.createdAt | date: 'YYYY/MM/dd' }}</p>
-      <button (click)="likePost(post.id)" type="button" class="btn btn-light">
+      <button (click)="likeOrUnlikePost(post.id)" type="button" class="btn btn-light">
         <i class="fas fa-thumbs-up"></i>
-        <span>{{ postLikesCount }}</span>
+        <span *ngIf="postLikesCount>0">{{ postLikesCount }}</span>
       </button>
-      <button type="button" class="btn btn-light">
+      <!-- <button type="button" class="btn btn-light">
         <i class="fas fa-thumbs-down"></i>
-      </button>
+      </button> -->
       <a routerLink="#" class="btn btn-primary">
-        Discussion <span class="comment-count">3</span>
+        Discussion <span *ngIf="postCommentsCount>0" class="comment-count">{{ postCommentsCount }}</span>
       </a>
       <button type="button" class="btn btn-danger">
         <i class="fas fa-times"></i>

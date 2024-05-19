@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PostDto } from 'src/app/services/models';
-import { GithubUserRepoControllerService, LikeControllerService, PostControllerService } from 'src/app/services/services';
+import { CommentControllerService, GithubUserRepoControllerService, LikeControllerService, PostControllerService } from 'src/app/services/services';
 
 @Component({
   selector: 'app-post-item',
@@ -14,10 +14,11 @@ export class PostItemComponent implements OnInit {
   post!: PostDto;
   postLikesCount!: number;
   avatarUrl!: string;
+  postCommentsCount!: number;
   
   constructor(
     private githubService: GithubUserRepoControllerService,
-    private postService: PostControllerService,
+    private commentService: CommentControllerService,
     private likeService: LikeControllerService
   ) {
   }
@@ -26,6 +27,7 @@ export class PostItemComponent implements OnInit {
     if(this.post) {
       this.getGravatarUrl(this.post.userDTO?.email as string);
       this.getPostLikesCount(this.post.id);
+      this.getPostCommentsCount(this.post.id);
     }
   }
 
@@ -50,8 +52,19 @@ export class PostItemComponent implements OnInit {
     });
   }
 
-  likePost(postId: any) {
-    this.postService.likeOrUnlikePost({ postId }).subscribe({
+  getPostCommentsCount(postId: any) {
+    this.commentService.getCommentsByPost({ postId }).subscribe({
+      next: (res) => {
+        this.postCommentsCount = res.length;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+
+  likeOrUnlikePost(postId: any) {
+    this.likeService.likeOrUnlikePost({ postId }).subscribe({
       next: () => {
         this.getPostLikesCount(postId);
       },
@@ -60,14 +73,4 @@ export class PostItemComponent implements OnInit {
       }
     })
   }
-  // unlikePost(likeId: any) {
-  //   this.postService.unlikePost({ likeId }).subscribe({
-  //     next: () => {
-  //       this.getPostLikesCount(this.post.id);
-  //     },
-  //     error: err => {
-  //       console.error(err);
-  //     }
-  //   });
-  // }
 }

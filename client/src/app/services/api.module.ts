@@ -9,9 +9,9 @@ import { ProfileControllerService } from './services/profile-controller.service'
 import { PostControllerService } from './services/post-controller.service';
 import { ExperienceControllerService } from './services/experience-controller.service';
 import { EducationControllerService } from './services/education-controller.service';
+import { LikeControllerService } from './services/like-controller.service';
 import { CommentControllerService } from './services/comment-controller.service';
 import { AuthApiService } from './services/auth-api.service';
-import { LikeControllerService } from './services/like-controller.service';
 import { GithubUserRepoControllerService } from './services/github-user-repo-controller.service';
 
 /**
@@ -27,9 +27,9 @@ import { GithubUserRepoControllerService } from './services/github-user-repo-con
     PostControllerService,
     ExperienceControllerService,
     EducationControllerService,
+    LikeControllerService,
     CommentControllerService,
     AuthApiService,
-    LikeControllerService,
     GithubUserRepoControllerService,
     ApiConfiguration
   ],

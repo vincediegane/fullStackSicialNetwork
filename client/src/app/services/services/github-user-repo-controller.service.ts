@@ -21,7 +21,7 @@ export class GithubUserRepoControllerService extends BaseService {
     super(config, http);
   }
 
-  get defaultAvatarUrl(){
+  get defaultAvatarUrl() {
     return environment.defaultAvatar;
   }
 
